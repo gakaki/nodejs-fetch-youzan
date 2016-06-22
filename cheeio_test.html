@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html class=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="referrer" content="always">
+
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title id="js-meta-title">
+商品管理 - 尖叫设计</title>
+
+<link rel="icon" href="https://b.yzcdn.cn/v2/image/yz_fc.ico">
+
+<meta name="keywords" content="有赞,微信商城,粉丝营销,微信商城运营">
+<meta name="description" content="有赞是帮助商家在微信上搭建微信商城的平台，提供店铺、商品、订单、物流、消息和客户的管理模块，同时还提供丰富的营销应用和活动插件。">
+
+	<script>
+		!function(e){e.onReady=function(t,o){if(o){var r=function(){e[t]?o():setTimeout(function(){r(t,o)},500)};r(t,o)}};var t=/complete|loaded/;e.afterLoad=function(o){t.test(document.readyState)&&document.body?setTimeout(o):e.addEventListener("load",o,!1)}}(window),function(e){var t,o={script:"src",link:"href"},r="b.yzcdn.cn",n="su.yzcdn.cn";e._cdnFallback=function(a){var c,i,l,d,f,m,u,s;if(c=a.nodeName.toLowerCase(),i=o[c]){l=d=a[i],l=l.replace(r,n),f=l==d,f||(m=document,u=m.head||m.getElementsByTagName("head")[0]||m.documentElement,s=m.createElement(c),"link"==c&&(s.rel="stylesheet"),s[i]=l,s.onerror=function(){_cdnFallback(s)},u.appendChild(s)),(new Image).src="//tj.koudaitong.com/1.gif?net_error=1&fileurl="+d;var g=l.indexOf(n)>-1||l.indexOf(r)>-1,y=!t&&f;y&&g&&(e.motify&&e.motify.error&&e.motify.error("啊哦，有东西加载失败了，刷新下试试~"),t=!0)}}}(window),function(e){"use strict";var t;e.localStorage;try{var o=new Date;try{localStorage.setItem(o,o)}catch(r){if(22===r.code)throw"localstorage define error"}var n=localStorage.getItem(o)==o;if(localStorage.removeItem(o),!n)throw"localstorage define error";if("FUNCTION"!=(typeof localStorage.clear).toUpperCase())throw"localstorage define error";t=localStorage}catch(r){var a=function(){return null};t={getItem:a,setItem:a,removeItem:a,clear:a}}"function"==typeof define&&define.amd&&define(function(){return t}),e.YZLocalStorage=t}(window);	</script>
+
+<link rel="stylesheet" href="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/chosen.css" onerror="_cdnFallback(this)">
+<!-- ▼ Common CSS -->
+<link rel="stylesheet" href="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/jquery.css" onerror="_cdnFallback(this)">
+<link rel="stylesheet" href="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/bootstrap_140705.css" onerror="_cdnFallback(this)">
+<link rel="stylesheet" href="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/pc_febece6dd9.css" onerror="_cdnFallback(this)"><!-- ▲ Common CSS -->
+
+<!-- ▼ App CSS -->
+<link rel="stylesheet" href="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/goods_2d10f938c9.css" onerror="_cdnFallback(this)"><!-- ▲ App CSS -->
+
+<!-- ▼ Common config -->
+<script>
+// global variables
+var _global = {"kdt_id":1111486,"user_id":"206608803","run_mode":"online","debug":false,"project":"default","online_debug":false,"js":{"js_compress":true,"css_compress":true,"use_js_cdn":true,"use_css_cdn":true,"message_report":true,"checkbrowser":true,"hide_wx_nav":true,"qn_public":"kdt_img","qn_private":"kdt-private"},"query_path":"\/showcase\/goods","query_key":"","real_query_path":"get:\/showcase\/goods\/index.html","module":"showcase","controller":"Showcase_Goods_Controller","action":"index","full_action":"getIndexHtml","method":"get","format":"html","account":"13621822254","sign":"","kdtnote_fans_id":0,"nick_name":"gakaki","gender":0,"avatar":"https:\/\/img.yzcdn.cn\/upload_files\/avatar.png","company_id":"1489991","team_status":{"weixin_pay":1,"weixin_pay_address":0,"alipay":1,"alipay_sign":0,"weixin_bind":1,"weibo_bind":0,"alipay_status":0,"weixin_server":0,"weixin_menu":0,"weixin_subscribe":0,"weixin_no":0,"weixin_oldsub":0,"team_certificate":1,"team_init":1,"qr_code":1,"no_fans_buy":0,"is_delete":0,"hide_shopping_cart":0,"other_shop":0,"pp_shop":0,"union_pay":1,"peer_pay":0,"feature_title":1,"team_change":0,"weixin_unbind":0,"pp_authenticated":0,"pp_guarantee_compensation":0,"cod_pay":0,"weixin_pay_origin":0,"weixin_pay_big_unbind":1,"weixin_pay_big_sign":0,"is_gift":1,"taobao_order_import":0,"weixin_service":0,"weixin_certificate":1,"team_contact_finish":0,"team_physical":0,"direct_seller":1,"bd_pay":1,"team_mobile_certificate":1,"skip_team_certificate":0,"wxpay_test":0,"is_wish":0,"is_drawal_lock":0,"is_trade_lock":0,"weixin_certsub":1,"is_message_lock":0,"message_menu":0,"user_management":0,"account_management":0,"oauth_permission":0,"small_store":0,"mutil_customer":0,"business_message":0,"card_coupon":0,"material_management":0,"vip_customer":0,"tiegan_customer":0,"ic_customer":0,"is_secured_transactions":1,"is_realtime_account":0,"buy_record":1,"secured_transactions_pop":0,"show_web_im":1,"customer_reviews":1,"fx_77":0,"oversea_edition":0,"goods_recommend":0,"business_customer":0,"team_return_address_finish":1,"margin":0,"show_wsc_web_im":1,"display_service_QRCode":0,"customer_reviews_all":1,"team_certificate_gf":0,"fee_customer":0,"team_close":0,"team_protect":0},"mp_data":{"team_name":"\u5c16\u53eb\u8bbe\u8ba1","business":"[{\"text\":\"\\u5bb6\\u5c45\\u5bb6\\u7eba\",\"value\":\"7\"}]","business_id":"7","store_url":"","contact_name":"\u738b\u680b","mobile":"13916580245","qq":"6656349","company_id":"1489991","logo":"http:\/\/dn-kdt-img.qbox.me\/upload_files\/2015\/03\/17\/Fgrta8L93gpMyJpPqukOEKnbZ-HJ.png"},"team_admin":{"level":1},"isNewUI":true,"payWays":[{"key":1,"code":"wxpay","name":"\u5fae\u4fe1\u5b89\u5168\u652f\u4ed8"},{"key":24,"code":"yzpay","name":"\u4fe1\u7528\u5361\u4ed8\u6b3e"},{"key":12,"code":"baiduwap","name":"\u50a8\u84c4\u5361\u4ed8\u6b3e"}],"payInfo":{"is_first":0,"is_agree":0,"is_alipay":1,"is_wxpay":1,"alipay_status":1},"url":{"base":"\/\/koudaitong.com","bbs":"http:\/\/bbs.youzan.com","cdn":"\/\/b.yzcdn.cn","cdn_static":"https:\/\/b.yzcdn.cn\/v2","cp":"http:\/\/cp.koudaitong.com","daxue":"http:\/\/xuetang.youzan.com","fenxiao":"\/\/fx.youzan.com","fuwu":"\/\/fuwu.youzan.com","img":"\/\/img.koudaitong.com","imgqn":"https:\/\/img.yzcdn.cn","login":"\/\/login.youzan.com","open":"\/\/open.koudaitong.com","static":"https:\/\/static.koudaitong.com\/v2","trade":"http:\/\/trade.koudaitong.com","v1":"http:\/\/koudaitong.com\/v1","v1_static":"\/\/static.koudaitong.com\/v1","v2":"\/\/koudaitong.com\/v2","wap":"https:\/\/wap.koudaitong.com\/v2","ws":"ws:\/\/s.im.youzan.com:83","www":"\/\/koudaitong.com\/v2","youzan":"\/\/youzan.com","cloud":"http:\/\/dl.koudaitong.com","pf":"https:\/\/pf.koudaitong.com","materials":"\/\/materials.koudaitong.com"}}
+window.UEDITOR_HOME_URL = _global.url.cdn_static + "/vendor/ueditor/dist/";
+window.UEDITOR_IFRAME_URL = _global.url.www + "/static/vendor/ueditor/dist/";
+
+// require common config
+var require = {
+    config: {
+        text: {
+            useXhr: function (url, protocol, hostname, port) {
+                // allow crossdomain requests
+                // remote server allows CORS
+                return true;
+            }
+        }
+    },
+    waitSeconds: 200,
+    jsx: {
+        fileExtension: '.jsx',
+        harmony: true
+    },
+    paths: {
+        "apps": "https://static.koudaitong.com/v2/www/pages",
+        "core": "https://static.koudaitong.com/v2/core",
+        "common": "https://static.koudaitong.com/v2/core/common",
+        "utils": "https://static.koudaitong.com/v2/core/utils",
+        "react": "https://static.koudaitong.com/v2/vendor/react/react-with-addons-0.14.7",
+        "react-dom": "https://static.koudaitong.com/v2/vendor/react/react-dom",
+        "flux": "https://static.koudaitong.com/v2/vendor/react/flux",
+        "react-router": "https://static.koudaitong.com/v2/vendor/react/ReactRouter",
+        "JSXTransformer": "https://static.koudaitong.com/v2/vendor/react/JSXTransformer",
+        "jsx": "https://static.koudaitong.com/v2/vendor/react/jsx",
+        "build": "https://static.koudaitong.com/v2/build",
+        "components": "https://static.koudaitong.com/v2/components",
+        "wap": "https://static.koudaitong.com/v2/wap",
+        "vendor": "https://static.koudaitong.com/v2/vendor",
+        "text": "https://static.koudaitong.com/v2/vendor/text",
+        "tpl": "https://static.koudaitong.com/v2/vendor/tpl",
+        "underscore": "https://static.koudaitong.com/v2/vendor/underscore",
+        "backbone": "https://static.koudaitong.com/v2/vendor/backbone",
+        "marionette": "https://static.koudaitong.com/v2/vendor/backbone.marionette",
+        "backbone.wreqr": "https://static.koudaitong.com/v2/vendor/backbone.wreqr",
+        "backbone.babysitter": "https://static.koudaitong.com/v2/vendor/backbone.babysitter",
+        "backbone.modelbinder": "https://static.koudaitong.com/v2/vendor/backbone.modelbinder.min",
+        "localstorage": "https://static.koudaitong.com/v2/vendor/backbone.localStorage",
+        "jqueryui": "https://static.koudaitong.com/v2/vendor/jquery-ui",
+        "backboneValidate": "https://static.koudaitong.com/v2/vendor/backbone-validation-amd",
+        "datetimepicker": "https://static.koudaitong.com/v2/vendor/plugin/jquery-ui-timepicker-addon",
+        "select2": "https://static.koudaitong.com/v2/vendor/plugin/select2",
+        "jquery": "https://static.koudaitong.com/v2/vendor/jquery-1.10.2",
+        "fileupload": "https://static.koudaitong.com/v2/vendor/jquery.fileupload",
+        "fileupload_image": "https://static.koudaitong.com/v2/vendor/jquery.fileupload-image",
+        "fileupload_validate": "https://static.koudaitong.com/v2/vendor/jquery.fileupload-validate",
+        "fileupload_process": "https://static.koudaitong.com/v2/vendor/jquery.fileupload-process",
+        "iframetransport": "https://static.koudaitong.com/v2/vendor/jquery.iframe-transport",
+        "bootstrap": "https://static.koudaitong.com/v2/vendor/plugin/bootstrap",
+        "notify": "https://static.koudaitong.com/v2/vendor/plugin/bootstrap-notify",
+        "clipboard": "https://static.koudaitong.com/v2/vendor/plugin/ZeroClipboard",
+        "socketio": "https://static.koudaitong.com/v2/vendor/socket.io-1.3.5",
+        "chosen": "https://static.koudaitong.com/v2/vendor/plugin/chosen.jquery",
+        "highcharts": "https://static.koudaitong.com/v2/vendor/plugin/highcharts",
+        "jwerty": "https://static.koudaitong.com/v2/vendor/plugin/jwerty",
+        "jQRaty": "https://static.koudaitong.com/v2/vendor/plugin/jquery.raty.min",
+        "cookie": "https://static.koudaitong.com/v2/vendor/plugin/jquery.cookie",
+        "stickytableheaders": "https://static.koudaitong.com/v2/vendor/plugin/jquery.stickytableheaders",
+        "jquery.minicounter": "https://static.koudaitong.com/v2/components/mini_counter/jquery.minicounter",
+        "backbone-forms": "https://static.koudaitong.com/v2/vendor/form/backbone-forms",
+        "bootstrap-forms": "https://static.koudaitong.com/v2/vendor/form/templates/bootstrap",
+        "citytools": "https://static.koudaitong.com/v2/vendor/plugin/jquery.citytools",
+        "iscroll": "https://static.koudaitong.com/v2/vendor/iscroll/iscroll-5.1.3.min",
+        "moment": "https://static.koudaitong.com/v2/vendor/moment",
+        "swiper-jquery": "https://static.koudaitong.com/v2/vendor/swiper-3.0.7/js/swiper.jquery",
+        "zenjs":  "https://static.koudaitong.com/v2/www/bower_components/zenjs",
+        "bower_components": "https://static.koudaitong.com/v2/www/bower_components",
+        "@youzan": "https://static.koudaitong.com/v2/www/node_modules/@youzan"
+    },
+    shim: {
+        "jquery": {
+            "exports": "$"
+        },
+        "jqueryui": {
+            "deps": ["jquery"]
+        },
+        "bootstrap": {
+            "deps": ["jquery"]
+        },
+        "underscore": {
+            "exports": "_"
+        },
+        "datetimepicker": {
+            "deps": ["jqueryui", "jquery"]
+        },
+        "utils": {
+            "exports": "utils"
+        },
+        "socketio": {
+            "exports": "io"
+        },
+        // Backbone
+        "backbone": {
+            // Depends on underscore/lodash and jQuery
+            "deps": ["underscore", "jquery"],
+
+            // Exports the global window.Backbone object
+            "exports": "Backbone"
+        },
+        "backbone.wreqr": {
+            // Depends on underscore/lodash and jQuery
+            "deps": ["underscore", "backbone"]
+        },
+        "backbone.modelbinder": {
+            "deps": ["backbone"]
+        },
+        "backboneValidate": {
+            "deps": ["backbone"]
+        },
+        "localstorage": {
+            "deps": ["backbone"]
+        },
+        "notify": {
+            "deps": ["bootstrap"]
+        },
+        "chosen": {
+            "deps": ["jquery"]
+        },
+        "highcharts": {
+            "deps": ["jquery"]
+        },
+        "jwerty": {
+            "deps": ["jquery"]
+        },
+        "jQRaty": {
+            "deps": ["jquery"]
+        },
+        "cookie": {
+            "deps": ["jquery"]
+        },
+        "select2": {
+            "deps": ["jquery"]
+        },
+        "stickytableheaders": {
+            "deps": ["jquery"]
+        },
+        "jquery.minicounter": {
+            "deps": ["jquery"]
+        },
+        "citytools": {
+            "deps": ["jquery"]
+        },
+        "swiper-jquery": {
+            "deps": ["jquery"]
+        },
+        "tpl": {
+            "deps": ["underscore", "text"]
+        }
+    }
+}
+</script>
+<!-- ▲ Common config -->
+
+    <script>
+!function(){"use strict";function i(){t||d||a||f&&s||r||(location.href=e+"/index/browser")}function o(){(r||a)&&(location.href=e+"/dashboard/index")}var n=navigator.userAgent,e=window._global.url.www,r=-1!==n.indexOf("Chrome"),a=-1!==n.indexOf("Firefox"),t=/(iPhone|iPad|iPod)/i.test(n),d=/Android/i.test(n),f=navigator.platform.toUpperCase().indexOf("MAC")>=0,s=-1!=n.indexOf("Safari");window._isDownloadChromePage?o():i()}();
+</script>
+<script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/h.txt" async="" charset="utf-8"></script><script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/bw-loader-411.js" async="" charset="utf-8"></script><script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/vds.js" async="" charset="utf-8"></script><style type="text/css" media="print">.tableFloatingHeader{display:none !important;}.tableFloatingHeaderOriginal{position:static !important;}</style></head>
+
+<body class="theme theme--blue theme-new-ui   show-help">
+
+    <!-- 新版商家后台 -->
+
+    <!-- ▼ Main sidebar -->
+    <aside id="app-sidebar">
+            <div id="app-first-sidebar">
+                <div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                                                            <a class="team-logo-wrap" href="https://koudaitong.com/v2/setting/store#index">
+                        <div class="team-logo" style="background-image: url(https://img.yzcdn.cn/upload_files/2015/03/17/Fgrta8L93gpMyJpPqukOEKnbZ-HJ.png?imageView2/2/w/60/h/60/q/75/format/png)">
+                        </div>
+                    </a>
+                    <nav>
+                        <ul class="clearfix">
+                                                        <li>
+                                <a href="https://koudaitong.com/v2/dashboard/index">
+                                    <i class="sidebar-icon sidebar-icon-dashboard"></i>
+                                    概况
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://koudaitong.com/v2/showcase/dashboard">
+                                    <i class="sidebar-icon sidebar-icon-shop"></i>
+                                    店铺
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="https://koudaitong.com/v2/showcase/goods#list">
+                                    <i class="sidebar-icon sidebar-icon-goods"></i>
+                                    商品
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://koudaitong.com/v2/trade/dashboard">
+                                    <i class="sidebar-icon sidebar-icon-order"></i>
+                                    订单
+                                </a>
+                            </li>
+                                                        <li>
+                                <a href="https://koudaitong.com/v2/fans/dashboard">
+                                    <i class="sidebar-icon sidebar-icon-fans"></i>
+                                    客户
+                                </a>
+                            </li>
+                                                        <li>
+                                <a href="https://koudaitong.com/v2/statcenter/dashboard">
+                                    <i class="sidebar-icon sidebar-icon-stat"></i>
+                                    数据
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://koudaitong.com/v2/trade/newsettlement">
+                                    <i class="sidebar-icon sidebar-icon-asset"></i>
+                                    资产
+                                </a>
+                            </li>
+
+                                                        <li style="margin-top: 44px;">
+                                <a href="https://koudaitong.com/v2/ump/dashboard">
+                                    <i class="sidebar-icon sidebar-icon-app"></i>
+                                    营销
+                                </a>
+                            </li>
+                                                        <li>
+                                <a href="https://koudaitong.com/v2/setting/store">
+                                    <i class="sidebar-icon sidebar-icon-setting"></i>
+                                    设置
+                                </a>
+                            </li>
+                            <li style="margin-top: 44px;">
+                                <a href="https://youzan.com/" target="_blank">
+                                    <i class="sidebar-icon sidebar-icon-youzan"></i>
+                                    有赞
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="app-user-info">
+                <span class="user-name">gakaki</span>
+                <span class="user-arrow"></span>
+                <div class="user-dropdown">
+                    <div class="user-dropdown-meta">
+                        <div>gakaki</div>
+                        <div>13621822254</div>
+                    </div>
+                    <div class="user-dropdown-select">
+                        <a href="https://koudaitong.com/v2/account/personal">帐号设置</a>
+                        <a href="https://koudaitong.com/v2/account/team#select">切换店铺</a>
+                        <a href="https://koudaitong.com/v2/account/user/logout">退出</a>
+                    </div>
+                </div>
+            </div>
+
+                            <div id="app-second-sidebar">
+                    <div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+   <div class="second-sidebar-title">
+        商品管理
+    </div>
+    <nav>
+        <ul>
+
+            <li class="active">
+                <a href="https://koudaitong.com/v2/showcase/goods#list">商品库</a>
+            </li>
+            <li>
+                <a href="https://koudaitong.com/v2/showcase/tag#list">商品分组</a>
+            </li>
+
+            <li>
+                <a href="https://koudaitong.com/v2/showcase/goodstemplate#list">页面模版</a>
+            </li>
+            <li>
+                <a href="https://koudaitong.com/v2/showcase/importgoods">商品导入</a>
+            </li>
+            <li>
+                <a href="https://koudaitong.com/v2/fenxiao/market?goods_fx=1" target="_blank">分销市场</a>
+            </li>
+            <li class=" ">
+                <a href="https://koudaitong.com/v2/showcase/changedgoods#list">分销变更</a>
+            </li>
+
+        </ul>
+
+            </nav>
+</div>                </div>
+                    </aside>    <!-- ▲ Main sidebar -->
+
+    <!-- ▼ Main container -->
+    <div id="app-container" class="container">
+
+                <div id="app-third-sidebar" class="js-app-third-sidebar">
+            <nav class="ui-nav">
+        <ul>
+            <li class="active" id="js-nav-list-index">
+                <a href="#list"><span>出售中</span></a>
+            </li><li id="js-nav-list-soldout">
+                <a href="#list&amp;is_soldout=1"><span>已售罄</span></a>
+            </li>
+            <li id="js-nav-list-draft">
+                <a href="#list&amp;is_display=0"><span>仓库中</span></a>
+            </li>
+        </ul>
+    </nav>            <div id="app-help-button" class="js-app-help-button">
+                <i class="app-help-icon app-help-icon-help"></i>帮助和服务
+            </div>
+        </div>
+        
+        <div id="app-container-top"></div>
+
+        <div class="app">
+            <div class="app-inner clearfix">
+                <div class="app-init-container">
+                                        <div class="app__content js-app-main"><div class="goods-list"><div class="js-list-filter-region clearfix ui-box" style="position: relative;"><div class="widget-list-filter">
+
+    <div class="pull-left">
+        <a class="ui-btn ui-btn-success " href="https://koudaitong.com/v2/showcase/goods/create">发布商品</a>
+    </div>
+
+
+<div class="js-list-goods-type-filter ui-chosen" style="width: 308px;">
+    <select style="display: none;" class="hide" data-placeholder="">
+        <option selected="selected" value="-1">全部商品</option>
+        <option value="0">一般商品</option>
+        <option value="10">分销商品</option>
+        <option value="20">会员卡</option>
+    </select><div title="" style="width: 0px;" class="chosen-container chosen-container-single"><a class="chosen-single" tabindex="-1"><span>全部商品</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input autocomplete="off" type="text"></div><ul class="chosen-results"></ul></div></div>
+</div>
+<div class="js-list-tag-filter ui-chosen" style="width: 200px;">
+    <select style="display: none;" class="hide" data-placeholder=""><option selected="selected" value="0">所有分组</option><option value="86458602">意外设计</option>
+<option value="86311106">Spherebol</option>
+<option value="86310966">Munio Candela</option>
+<option value="86310901">karakter</option>
+<option value="86310851">Mo</option>
+<option value="86310787">辛瑶遥</option>
+<option value="86310655">EcoFurniture</option>
+<option value="86310569">geo-grafia</option>
+<option value="86310441">Teamgreen</option>
+<option value="86310401">AIM</option>
+<option value="86310250">绵延</option>
+<option value="86310221">RAY</option>
+<option value="86310168">一般工作室</option>
+<option value="86309923">Verpan</option>
+<option value="86309728">Nanoleaf</option>
+<option value="86309556">Askman</option>
+<option value="86309430">Room Copenhagen</option>
+<option value="86309147">BOZU</option>
+<option value="86309095">Roommate</option>
+<option value="86308877">Collect Furniture</option>
+<option value="86308791">品物流形</option>
+<option value="86308604">brdr.pertersen</option>
+<option value="86308529">自然家</option>
+<option value="86308392">BUT Design</option>
+<option value="86308338">Hoptimist</option>
+<option value="86308089">飞形物</option>
+<option value="86307968">本来设计</option>
+<option value="86307804">bobble</option>
+<option value="86307590">Architectmade</option>
+<option value="86307497">Sistema</option>
+<option value="86307235">Plus d</option>
+<option value="86307081">造物</option>
+<option value="86306832">Conti</option>
+<option value="86306612">唯诗</option>
+<option value="86306460">Umbra Shift</option>
+<option value="86306306">QisDesign</option>
+<option value="86306039">aida</option>
+<option value="86305685">onecollection</option>
+<option value="86305299">HAY</option>
+<option value="86305120">Louise Roe</option>
+<option value="86283103">其他</option>
+<option value="86283070">清洁用具</option>
+<option value="86283034">桌布</option>
+<option value="86282978">储物保鲜</option>
+<option value="86282947">厨具</option>
+<option value="86282924">餐具</option>
+<option value="86102363">童趣</option>
+<option value="86101429">其他</option>
+<option value="86101408">饰品</option>
+<option value="86101387">文具</option>
+<option value="86101371">靠垫织物</option>
+<option value="86101359">墙饰</option>
+<option value="86101338">收纳储物</option>
+<option value="86101318">镜子</option>
+<option value="86101289">摆饰</option>
+<option value="86101260">时钟</option>
+<option value="86100383">其他</option>
+<option value="86100344">壁灯</option>
+<option value="86100332">落地灯</option>
+<option value="86100323">吊灯</option>
+<option value="86100295">台灯</option>
+<option value="86074015">其他</option>
+<option value="86074007">衣帽架</option>
+<option value="86073966">床</option>
+<option value="86073959">橱柜</option>
+<option value="86073945">桌几</option>
+<option value="86073932">沙发</option>
+<option value="86073892">座椅</option>
+<option value="86072176">Umbra</option>
+<option value="86071597">Vitra.</option>
+<option value="86071490">S'well</option>
+<option value="86071289">Carl Hansen&amp;Son</option>
+<option value="86071105">多少MoreLess</option>
+<option value="86070382">Muuto</option>
+<option value="86070171">Iittala</option>
+<option value="86057126">Richard Brendon</option>
+<option value="86052444">Zoku</option>
+<option value="83277209">活动</option>
+<option value="83215123">食居</option>
+<option value="12324122">空间</option>
+<option value="12324103">灯光</option>
+<option value="12324046">装点</option>
+<option value="12319910">家什</option>
+<option value="12236592">列表中隐藏</option>
+<option value="12236591">最热商品</option>
+<option value="12236590">最新商品</option>
+<option value="12236589">其他</option></select><div title="" style="width: 0px;" class="chosen-container chosen-container-single"><a class="chosen-single" tabindex="-1"><span>所有分组</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input autocomplete="off" type="text"></div><ul class="chosen-results"></ul></div></div>
+</div>
+<div class="js-list-search ui-search-box">
+    <input class="txt" placeholder="搜索" type="text">
+</div>
+</div></div>
+<div class="ui-box">
+    <table style="padding: 0px;" class="ui-table ui-table-list">
+        <thead style="position: static; top: 0px; margin-top: 0px; left: 225px; z-index: 1; width: 793px;" class="js-list-header-region tableFloatingHeaderOriginal"><tr class="widget-list-header"><th style="min-width: 309px; max-width: 309px;" class="checkbox cell-35" colspan="3">
+    <label class="checkbox inline">
+        <input class="js-check-all" type="checkbox">
+        商品
+    </label>
+    <a href="javascript:;" data-orderby="price">价格</a></th>
+
+
+<th style="min-width: 79px; max-width: 79px;" class="cell-10">访问量</th>
+<th style="min-width: 63px; max-width: 63px;" class="cell-8 text-center"><a href="javascript:;" data-orderby="stock_num">库存</a></th>
+<th style="min-width: 63px; max-width: 63px;" class="cell-8 text-center"><a href="javascript:;" data-orderby="sold_num">总销量</a></th>
+<th style="min-width: 95px; max-width: 95px;" class="cell-12 text-center"><a href="javascript:;" data-orderby="created_time">创建时间<span class="orderby-arrow desc"></span></a></th>
+<th style="min-width: 63px; max-width: 63px;" class="cell-8 text-center"><a href="javascript:;" data-orderby="num">序号</a></th>
+<th style="min-width: 119px; max-width: 119px;" class="cell-15 text-right">操作</th>
+</tr></thead><thead style="display: none;" class="js-list-header-region tableFloatingHeader"><tr class="widget-list-header"><th class="checkbox cell-35" colspan="3">
+    <label class="checkbox inline">
+        <input class="js-check-all" type="checkbox">
+        商品
+    </label>
+    <a href="javascript:;" data-orderby="price">价格</a></th>
+
+
+<th class="cell-10">访问量</th>
+<th class="cell-8 text-center"><a href="javascript:;" data-orderby="stock_num">库存</a></th>
+<th class="cell-8 text-center"><a href="javascript:;" data-orderby="sold_num">总销量</a></th>
+<th class="cell-12 text-center"><a href="javascript:;" data-orderby="created_time">创建时间<span class="orderby-arrow desc"></span></a></th>
+<th class="cell-8 text-center"><a href="javascript:;" data-orderby="num">序号</a></th>
+<th class="cell-15 text-right">操作</th>
+</tr></thead>
+        <tbody class="js-list-body-region"><tr class="widget-list-item"><td class="checkbox" data-item-id="265119281">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fp6CmtNWIVo7t_lBrqjSmOeSx3fW.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/1yiqddxsv2032" target="_blank" class="new-window" title="【物应】黑胡桃实木 流云-衣帽架">
+                【物应】黑胡桃实木 流云-衣帽架
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥2280.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 0</div>
+    <div>PV: 0</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-03 11:21:58
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265119281" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="265176304">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FiJHLPKwadQ3Ur-Yb7Jbi83H9R1o.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/1yl6d5lm2ls2m" target="_blank" class="new-window" title="【物应】黑胡桃实木 寂月- 梳妆凳">
+                【物应】黑胡桃实木 寂月- 梳妆凳
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥663.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 1</div>
+    <div>PV: 1</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-03 11:02:32
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265176304" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="265098242">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FiL-pMYXm7X4X2Ev_XpAcNBAE5Y7.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/26vaw2eh0z8ta" target="_blank" class="new-window" title="【物应】黑胡桃实木 寂月- 圆月镜">
+                【物应】黑胡桃实木 寂月- 圆月镜
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥980.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 1</div>
+    <div>PV: 2</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-03 10:42:48
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265098242" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="265504206">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fjio95gVOh1cxjja9bKm6V1sTXC-.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/3exusgxgyfuum" target="_blank" class="new-window" title="【物应】实木 扫秒静音钟 两款">
+                【物应】实木 扫秒静音钟 两款
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥98.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 1</div>
+    <div>PV: 2</div>
+</td>
+<td class="text-center">
+    
+    10
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-03 10:11:04
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265504206" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264894854">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FqRxVDtvKyzqv9QqXjyKgSN0p-R0.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/3nvb9a5l6ivse" target="_blank" class="new-window" title="【物应】黑胡桃木橡木 交叉拼接置物架">
+                【物应】黑胡桃木橡木 交叉拼接置物架
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥128.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 3</div>
+    <div>PV: 3</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 17:45:33
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264894854" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264882980">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FitZV6ZAKlcbQoLBa6J_2PgMIc4Z.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2xgfkyykq2jwu" target="_blank" class="new-window" title="【物应】黑胡桃木 三脚茶桌边桌">
+                【物应】黑胡桃木 三脚茶桌边桌
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥704.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 4</div>
+    <div>PV: 5</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 17:12:57
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264882980" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264937672">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FiVrgj4wMjW4vz_dDp4D-behr9tw.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/1yiqjo52thrpq" target="_blank" class="new-window" title="【物应】带开口储物 黑胡桃榉木 方形鼠标垫">
+                【物应】带开口储物 黑胡桃榉木 方形鼠标垫
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥98.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 2</div>
+    <div>PV: 2</div>
+</td>
+<td class="text-center">
+    
+    10
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 16:48:07
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264937672" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264903550">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FvLqjWmFrBJHq-Utc-QmI6Iqo7PE.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2fwgq8hbp54jy" target="_blank" class="new-window" title="【物应】黑胡桃榉木 环扣本记事本">
+                【物应】黑胡桃榉木 环扣本记事本
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥98.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 3</div>
+    <div>PV: 4</div>
+</td>
+<td class="text-center">
+    
+    20
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 15:44:43
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264903550" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264822077">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FmNX1-7SojwkeBafTIxSOLhj41r8.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/276d4clj2csz2" target="_blank" class="new-window" title="【爱瓦】Tait  Turbo Flyer 手工拼插飞机轻模型 四色">
+                【爱瓦】Tait  Turbo Flyer 手工拼插飞机轻模型 四色
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥180.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 1</div>
+    <div>PV: 1</div>
+</td>
+<td class="text-center">
+    
+    20
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 15:04:31
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264822077" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264806303">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fq9GzvU3F4oTswY2dNyWsOy9uaoV.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/1yhj8mcfn8zz2" target="_blank" class="new-window" title="【爱瓦】SEW A SONG系列 缟玛瑙手工黄铜项链">
+                【爱瓦】SEW A SONG系列 缟玛瑙手工黄铜项链
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥358.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 3</div>
+    <div>PV: 8</div>
+</td>
+<td class="text-center">
+    
+    50
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 14:31:47
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264806303" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264782807">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Frh_JP9qQbFgWD1Qv6ZCpIgwMMEE.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2g2n4y5ml2d3i" target="_blank" class="new-window" title="【EcoFurniture】Eco椅&amp;Lilly桌（套装）">
+                【EcoFurniture】Eco椅&amp;Lilly桌（套装）
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥1980.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 2</div>
+    <div>PV: 4</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 13:40:41
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264782807" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="265203168">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FjSeSdSj7egO51DlLBWJ9owDuIOJ.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/3nizgoqhpuw4u" target="_blank" class="new-window" title="【爱瓦】刮刮地图精华版">
+                【爱瓦】刮刮地图精华版
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥258.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 1</div>
+    <div>PV: 1</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 13:37:21
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265203168" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264818314">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fo3AxLO05OQe-tDBrj53Phy_jtKg.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2xlcfhqc6r8u6" target="_blank" class="new-window" title="【素生】HOMETOWN系列 贵人名片夹 三款">
+                【素生】HOMETOWN系列 贵人名片夹 三款
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥99.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 3</div>
+    <div>PV: 5</div>
+</td>
+<td class="text-center">
+    
+    15
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 12:26:12
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264818314" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264727205">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fjg8xHFfHp_Q_94b4_bvybjF3tHe.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2x421zp1izhy6" target="_blank" class="new-window" title="【素生】竹织系列 shadow影竹编陶瓷花瓶 双色">
+                【素生】竹织系列 shadow影竹编陶瓷花瓶 双色
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥688.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 3</div>
+    <div>PV: 4</div>
+</td>
+<td class="text-center">
+    
+    10
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 11:19:11
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264727205" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="265131681">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/Fj5zdEEaYajws5ILhE5GAKPjF9V5.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/26yz8atukkmoe" target="_blank" class="new-window" title="【素生】竹织系列 bean豆灯 大小三款">
+                【素生】竹织系列 bean豆灯 大小三款
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥1800.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 2</div>
+    <div>PV: 3</div>
+</td>
+<td class="text-center">
+    
+    15
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-02 10:45:09
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=265131681" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264606718">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FkFLcyzEUFcFhiucRiE7uwVbTwPM.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2of7hce1flthq" target="_blank" class="new-window" title="【Moiminjia】Baby vase 陶瓷花瓶摆件 五色">
+                【Moiminjia】Baby vase 陶瓷花瓶摆件 五色
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥108.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 8</div>
+    <div>PV: 10</div>
+</td>
+<td class="text-center">
+    
+    30
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-01 18:31:33
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264606718" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264588673">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FsIiwRXBwjIDX_cYFIZZxz-cROQl.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2ogfzz19a5v8u" target="_blank" class="new-window" title="【Moiminjia】mummo陶瓷奶壶 三色">
+                【Moiminjia】mummo陶瓷奶壶 三色
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥168.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 4</div>
+    <div>PV: 7</div>
+</td>
+<td class="text-center">
+    
+    15
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-01 17:27:58
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264588673" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264384278">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FuE7HSX6cmcA8uqSxpK5X7NAKNyY.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/3nlguphvc7twe" target="_blank" class="new-window" title="【素生】雨荷木盘 2件装">
+                【素生】雨荷木盘 2件装
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥180.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 5</div>
+    <div>PV: 11</div>
+</td>
+<td class="text-center">
+    
+    15
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-06-01 11:22:40
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264384278" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264154558">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FnaYbvzH0b8qBUhMiC4kieYeuD1F.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/2ok4c4txg3zqm" target="_blank" class="new-window" title="【爱瓦】fog linen work 黄铜系列碗盘">
+                【爱瓦】fog linen work 黄铜系列碗盘
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥138.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 4</div>
+    <div>PV: 5</div>
+</td>
+<td class="text-center">
+    
+    30
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-05-31 18:06:45
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264154558" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr><tr class="widget-list-item"><td class="checkbox" data-item-id="264499245">
+    <input class="js-check-toggle" type="checkbox">
+</td>
+<td class="goods-image-td">
+    <div class="goods-image js-goods-image ">
+        <img src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/FglBJcTxWbYvYe7YY2-tNfcpJqdR.jpg">
+    </div>
+</td>
+<td class="goods-meta">
+    <p class="goods-title">
+        
+            <a href="https://wap.koudaitong.com/v2/goods/27a1z9n1ngoji" target="_blank" class="new-window" title="【爱瓦】F&amp;R 摩洛哥红土燕麦粉香皂">
+                【爱瓦】F&amp;R 摩洛哥红土燕麦粉香皂
+            </a>
+        
+
+    </p>
+    <p>
+        
+        <span class="goods-price">￥160.00</span>
+    </p>
+    <p class="warning-msg">
+        <span>该商品当前参加拼团活动</span>
+    </p>
+</td>
+<td>
+    <div>UV: 2</div>
+    <div>PV: 2</div>
+</td>
+<td class="text-center">
+    
+    5
+    
+</td>
+<td class="text-center">
+    
+        
+            <span class="gray">-</span>
+        
+    
+</td>
+<td class="text-center">
+    2016-05-31 17:45:47
+</td>
+<td class="text-center">
+    <a class="js-change-num" href="javascript:void(0);">0</a>
+    <input class="input-mini js-input-num" min="0" maxlength="8" style="display: none;" value="0" type="number">
+</td>
+
+<td class="text-right">
+    
+        <p>
+            <a href="https://koudaitong.com/v2/showcase/goods/edit#id=264499245" class="js-edit">编辑</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-delete">删除</a>
+            <span>-</span>
+            <a href="javascript:void(0);" class="js-promotion-btn">推广商品</a>
+        </p>
+        <p>
+            
+                <a href="javascript:;" class="js-copy hover-show">复制</a>
+            
+        </p>
+        <!-- 分销商品 -->
+        
+    
+</td>
+</tr></tbody>
+    </table>
+    <div class="js-list-empty-region"></div>
+</div>
+<div class="js-list-footer-region ui-box"><div class="widget-list-footer">
+
+<div class="pull-left">
+    <a href="javascript:;" class="ui-btn js-batch-template">修改模板</a>
+    <a href="javascript:;" class="ui-btn js-batch-tag" data-loading-text="加载...">改分组</a>
+    
+    
+        <a href="javascript:;" class="ui-btn js-batch-unload">下架</a>
+    
+    <a href="javascript:;" class="ui-btn js-batch-delete">删除</a>
+    <a href="javascript:;" class="ui-btn js-batch-discount">会员折扣</a>
+</div>
+
+
+<div class="pagenavi">
+<span class="total">共 735 条，每页 20 条</span>
+
+                        <a data-page-num="1" href="javascript:;" class="num active">1</a>
+                                    <a data-page-num="2" class="fetch_page num" href="javascript:void(0);">2</a>
+                        ...
+                            <a data-page-num="37" class="fetch_page num" href="javascript:void(0);">37</a>
+                        <span class="js-goto goto">
+            <span class="js-goto-input js-jump-page goto-input" contenteditable="true">1</span>
+            <span>/ 37页</span>
+        </span>
+                <a class="fetch_page next" data-page-num="2" href="javascript:;">下一页</a>
+    
+</div>
+</div></div>
+</div></div>
+<div class="fx-promote-goods js-fx-promote-goods"></div>                                    </div>
+                <div class="notify-bar js-notify animated hinge hide">
+                </div>
+            </div>
+        </div>
+    </div>    <!-- ▲ Main container -->
+
+    <div class="show-help" style="min-height: 1913px;" id="app-help-container"><div class="help-container-head">
+    <i class="app-help-icon app-help-icon-help"></i>
+    <span>帮助和服务</span>
+    <i class="app-help-icon app-help-icon-close"></i>
+</div>
+<div class="help-container-body">
+    <div>
+        <div class="help-body-title">
+            帮助中心
+            <a href="https://koudaitong.com/v2/service" target="_blank" class="pull-right">
+                进入 <i class="app-help-icon app-help-icon-more"></i>
+            </a>
+        </div>
+        
+        <div class="help-body-content">
+            <p><span style="color: #333333;">商品在出售中列表找不到？<br></span><span style="line-height: 1.5em; color: #999999;">1.商品被手动下架，在仓库中，重新编辑上架即可。<br></span><span style="line-height: 1.5em; color: #999999;">2.商品售罄库存为0，在已售罄列表中，提醒您该添加库存了。待付款订单也会占据库存，其超时关闭后库存才会释放。</span></p>
+<p><span style="line-height: 1.5em; color: #333333;">如何推广商品？<br></span><span style="line-height: 1.5em; color: #999999;">点击[推广商品]，就可以获取商品二维码/商品链接，还能设置商品优惠二维码。<br></span><span style="line-height: 1.5em; color: #999999;">将商品分享到朋友圈，或群发时带上商品链接去推广。</span></p>
+<hr>
+<p><a target="_blank" href="https://bbs.youzan.com/forum.php?mod=viewthread&amp;tid=43497">发布商品详解</a></p>
+<p><a target="_blank" href="https://bbs.youzan.com/forum.php?mod=viewthread&amp;tid=19357">如何使用虚拟商品</a></p>
+<p><a target="_blank" href="https://bbs.youzan.com/forum.php?mod=viewthread&amp;tid=18925">如何管理商品</a></p>
+        </div>
+        
+        
+        <div class="help-body-split-line"></div>
+        <div style="margin: 0 10px;">
+            <a href="http://bbs.youzan.com/forum.php?gid=57" target="_blank">
+                <i class="app-help-icon app-help-icon-service"></i>
+                联系客服
+            </a>
+            <a href="http://bbs.youzan.com/forum.php?mod=viewthread&amp;tid=51125" target="_blank" style="margin-left: 24px;">
+                <i class="app-help-icon app-help-icon-feedback"></i>
+                意见反馈
+            </a>
+        </div>
+        
+
+        <div class="help-body-split-line"></div>
+        <div class="help-body-title">
+            有赞代理商
+            <a href="https://fuwu.youzan.com/" target="_blank" class="pull-right">
+                找服务 <i class="app-help-icon app-help-icon-more"></i>
+            </a>
+        </div>
+        
+            <ul class="fuwu-list">
+                
+                    <li class="fuwu-item">
+                        <a href="https://fuwu.youzan.com/detail?id=35" target="_blank">
+                            <div class="fuwu-item-logo" style="background-image: url(https://img.yzcdn.cn/upload_files/2015/07/31/Fv6IgDl13kTOpJLU1RR6Ni3ApQbA.jpg?imageView2/2/w/64/h/64/q/75/format/jpg)"></div>
+                            <div class="fuwu-item-info">
+                                <div class="fuwu-item-name">上海毅洋信息科技有限公司</div>
+                                <div class="fuwu-item-province">上海 上海</div>
+                            </div>
+                        </a>
+                    </li>
+                
+            </ul>
+        
+    </div>
+</div>
+</div>
+    <div id="app-footer">
+        <a href="https://youzan.com/" class="logo" target="_blank"></a>
+    </div>
+
+
+
+<script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/stacktrace.js" onerror="_cdnFallback(this)"></script>
+<!-- ▼ App JS -->
+<script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/require.js" onerror="_cdnFallback(this)"></script><script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/global_aa023afd24.js" onerror="_cdnFallback(this)" crossorigin="anonymous"></script><script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/goods_a95b8cf94c.js" onerror="_cdnFallback(this)" crossorigin="anonymous"></script>
+
+<script>
+    window.onReady('requirejs', function() {
+        var req = require.config({
+            baseUrl: 'https://static.koudaitong.com/v2/www/pages/showcase/goods'
+        });
+        window.req = req
+
+                    req(['main'], function(App) {
+                if (App && App.initialize && (Object.prototype.toString.call(App.initialize) == '[object Function]')) {
+                    App.initialize();
+                }
+            }, function(err) {
+                if (window.TraceKit && TraceKit.report) {
+                    TraceKit.report(err);
+                }
+            });
+            })
+</script>	<script>
+    	"use strict";!function(n,e){function t(n){return"complete"===n.readyState||"loaded"===n.readyState}function o(n,t,o){var c=e.createElement("link");c.rel="stylesheet",a(c,o,"css"),c.async=!0,c.href=n,d.appendChild(c)}function c(n,t,o){var c=e.createElement("script");c.charset="utf-8",a(c,o,"js"),c.async=!t.sync,c.src=n,d.appendChild(c)}function i(n,e){var t;n.sheet&&(t=!0),setTimeout(function(){t?e():i(n,e)},20)}function a(e,o,c){function a(){e.onload=e.onreadystatechange=null,e=null,o()}var r="onload"in e,u="css"===c;return!u||!f&&r?void(r?(e.onload=a,e.onerror=function(){e.onerror=null,n._cdnFallback(e)}):e.onreadystatechange=function(){t(e)&&a()}):void setTimeout(function(){i(e,o)},1)}function r(n,e,t,i){function a(){var t=e.indexOf(n);t>-1&&e.splice(t,1),0===e.length&&i()}l.test(n)?o(n,t,a):c(n,t,a)}function u(n,e,t){var o=function(){t&&t()};if(n=Array.prototype.slice.call(n||[]),0===n.length)return void o();for(var c=0,i=n.length;i>c;c++)r(n[c],n,e,o)}function s(e,o){if(t(e))o();else{var c=1500,i=!1;n.addEventListener("load",function(){i||(o(),i=!0)}),setTimeout(function(){i||(o(),i=!0)},c)}}var l=new RegExp("\\.css"),d=e.head||e.getElementsByTagName("head")[0],f=+navigator.userAgent.replace(/.*(?:AppleWebKit|AndroidWebKit)\/?(\d+).*/i,"$1")<536,v={async:function(n,t){s(e,function(){u(n,{},t)})},sync:function(n,t){s(e,function(){u(n,{sync:!0},t)})}};return n.Loader=v,v}(window,document);	</script>
+<!-- ▲ App JS -->
+
+    <div style="display:none;">
+        <script type="text/javascript">
+            // 在其他资源全部加载完成后，加载统计的脚本
+            (function() {
+
+                var protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+
+                // Baidu统计
+                Loader.async([protocol + "hm.baidu.com/h.js%3F61f180f659535f6bde14d3b908c3a7d0"]);
+
+                // ONEAPM性能监控
+                window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"tpm.oneapm.com/static/js/bw-send-411.4.5.js","beaconUrl":"tpm.oneapm.com/beacon","licenseKey":"mb~2NZmIbyeyrarA","applicationID":7605};
+                Loader.async([protocol + 'tpm.oneapm.com/static/js/bw-loader-411.4.5.js']);
+
+                // 页面按钮点击，访问路径统计
+                var _vds = _vds || [];
+                _vds.push(['setAccountId', '767813e963734402a8256e1096b88331']);
+                _vds.push(['setOrigin', protocol + 'youzan.growing.io']);
+                window._vds = _vds;
+                Loader.async([protocol + 'dn-growing.qbox.me/vds.js']);
+
+            })();
+
+            try {
+                if (window.console && window.console.log) {
+                    console.log("%c", "padding:20px 200px; line-height:80px;background:url('http://kdt-static.qiniucdn.com/v2/image/intro/logo.png') no-repeat center center");
+                    console.log('如何让我遇见你，在你最美的时候\n加入有赞，去中心化的消费平台，你，可以让世界更美好一些\n');
+                    console.log("请将简历发送至 %c hr@qima-inc.com（邮件标题请以“姓名-应聘XX职位-来自console”命名）", "color:red");
+                    console.log("职位介绍：http://job.youzan.com\n\n");
+                }
+            } catch (e) {}
+
+        </script>
+    </div>
+
+
+<script src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/bw-send-411.js"></script><script async="" src="%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86%20-%20%E5%B0%96%E5%8F%AB%E8%AE%BE%E8%AE%A1_files/a.html" type="text/javascript"></script><div class="widget-notice-center">
+<div id="app-notice-container">
+    <a href="http://b.im.koudaitong.com/" target="_blank">
+        <div class="app-notice-item js-message-container">
+            <i class="app-notice-icon app-notice-icon-message"></i>
+            客户消息
+        </div>
+    </a>
+    <div class="app-notice-item js-notice-center-ring">
+        <i class="app-notice-icon app-notice-icon-notice"></i>
+        通知
+        <span class="js-unread-count"></span>
+    </div>
+</div>
+
+
+
+<div class="widget-notice-center-wrapper js-notice-center-wrapper ">
+    <div class="js-list-header-region"><div class="widget-list-item"><div class="widget-notice-center-title clearfix">
+    <h3 class="pull-left">
+        系统通知
+        
+    </h3>
+    <a href="javascript:;" class="js-close pull-right">收起 》</a>
+</div>
+</div></div>
+    <div class="js-list-empty-region"><div><div class="notice-empty">没有发现新信息</div>
+</div></div>
+    <ul class="js-list-body-region widget-notice-center-content"></ul>
+    <div class="js-list-footer-region"><div class="widget-list-footer"><div class="widget-notice-center-footer">
+    <a href="javascript:;" class="mark-all-as-read js-mark-all-as-read">全部标记已读</a>
+    <a href="https://koudaitong.com/v2/notice/dashboard" class="pull-right">查看全部信息</a>
+</div>
+</div></div>
+</div>
+</div></body></html>

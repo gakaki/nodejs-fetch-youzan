@@ -1,0 +1,7 @@
+MACOSX
+__
+NODE_MODULES
+node_modules
+node_modules/*
+selenium-server-standalone-2.53.0.jar
+*.jar

@@ -42,6 +42,27 @@ wi.getTitle().then(function(title) {
         w.exec();
     });
 
+let async_youzan_row = async function( num_iid ){
+
+		// 引入有赞SDK
+		let SDK 		= require('youzan-sdk');
+		// 初始化SDK，在 https://koudaitong.com/v2/apps/open/setting 开启API接口，复制相应 AppID、AppSecert
+
+		let AppID 		= "0eb3d2acf73c033353"
+		let AppSecert 	= "e4dbae40b7a367c1efb7eea48c00fa75"
+		let sdk_obj 	= SDK({key: AppID, secret: AppSecert})
+		let data 		= await sdk_obj.get('kdt.item.get', {
+		    num_iid: num_iid,
+		    fields: ""
+		});
+
+		let youzan_row  = data.response.item;
+		console.log(youzan_row);
+		return youzan_row;
+}
+
+
+
 class Worker{
     constructor(wi){
         this.rows_total = [];
@@ -76,35 +97,40 @@ class Worker{
 //
         })
     }
-    exec(){
-        let selector_page_next = '.fetch_page.next';
+    async exec(){
+		
+        let selector_page_next 	  = '.fetch_page.next';
+		let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
+		
+    
+        let c                     = new YouzanFetch($)
+        let data                  = html[0];
+        let res                   = c.get_page_rows(data);
+        console.log("rows",html,res)
+		for(let r of res){
+			let product_id		  = r['id'];
+			console.log( "r id" , product_id )
+			let youzan_row_data   = await async_youzan_row( product_id );
+			console.log( "r youzan data is " , youzan_row_data )
+			r  = Object.assign(r,youzan_row_data);
+		}
 
+        this.rows_total.push(res)
+        this.wi.pause(this.timeout).click(selector_page_next)
 
-        this.wi.pause(this.timeout).getHTML('.js-list-body-region').then((html) =>{
+        this.wi.isExisting(selector_page_next).then((isExisting) =>{
+            console.log(isExisting);
+            if(isExisting){
+                this.exec();
+            }else{
+                this.rows_total = [].concat(...this.rows_total);
+                console.log(this.rows_total);
 
-            let c                     = new YouzanFetch($)
-            let data                  = html[0];
-            let res                   = c.get_page_rows(data);
-            console.log("rows",html,res)
+                this.wi.end();
+                this.to_db();
 
-            this.rows_total.push(res)
-            this.wi.pause(this.timeout).click(selector_page_next)
+            }
+        })
 
-            this.wi.isExisting(selector_page_next).then((isExisting) =>{
-                console.log(isExisting);
-                if(isExisting){
-                    this.exec();
-                }else{
-                    this.rows_total = [].concat(...this.rows_total);
-                    console.log(this.rows_total);
-
-                    this.wi.end();
-                    this.to_db();
-
-
-
-                }
-            })
-        });
     }
 }

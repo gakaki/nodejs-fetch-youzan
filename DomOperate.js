@@ -1,5 +1,7 @@
 "use strict";
 
+
+
  class YouzanFetch{
     constructor($){
         this.$                = $;
@@ -62,6 +64,7 @@
                     stock           : stock,
                     created_at      : created_at
                 };
+				
                 this.final_data.push(o);
                 return o;
             }else{

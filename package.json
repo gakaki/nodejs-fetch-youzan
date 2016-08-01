@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "se": "java -jar *.jar -Dwebdriver.chrome.driver='chromedriver' &",
-    "start": "npm run se;",
+    "start": "npm run se;node bootstrap.js;",
     "build": "browserify index.js > bundle.js",
     "browser": "budo index.js --open"
   },
@@ -16,7 +16,7 @@
 	"babel": "^6.0.15",
 	"babel-core": "^6.1.2",
 	"request": "^2.65.0",
-	"youzan-sdk": "0.0.8"
+	"youzan-sdk": "0.0.8",
     "bluebird": "^3.4.0",
     "browserify": "^13.0.0",
     "cheerio": "^0.20.0",

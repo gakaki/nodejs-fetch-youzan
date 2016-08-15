@@ -1,0 +1,111 @@
+周日 8点
+
+mysql 优惠券 专题 分享
+
+admin-web
+admin-api
+新数据库
+
+
+
+一台服务器
+负载均衡服务器
+
+
+
+
+cat ~/.ssh/id_rsa.pub | ssh root@114.55.132.84 "cat >> ~/.ssh/authorized_keys"
+B@zE#j1r8H31RR$K
+
+cat ~/.ssh/id_rsa.pub | ssh root@114.55.176.124 "cat >> ~/.ssh/authorized_keys"
+LE8yVcWG2qUtdK3V
+
+
+docker spring boot 一个
+对应 spring boot的配置文件一个 要改配置的
+
+然后 一个 spring boot 对应 一个 mysql
+然后一个 spring boot 对应一个 redis 密码也可能不同
+
+分别部署在一台真实服务器上
+
+那么就一个docker compose
+
+sudo systemctl restart docker 
+
+
+ALTER USER 'root'@'%' IDENTIFIED BY 'z123456';
+ALTER USER 'admin'@'%' IDENTIFIED BY 'bOLZwUhs9aojUN81';
+
+
+
+
+wow.datasource.admin.url=jdbc:mysql://127.0.0.1:3388/wowdsgn_admin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.admin.username=admin
+wow.datasource.admin.password=bOLZwUhs9aojUN81
+
+sudo ifconfig eth0:0 10.0.60.121 up
+
+
+
+nano /etc/systemd/system/admin-api.service
+
+[Unit]
+Description=admin-api
+After=syslog.target
+
+[Service]
+User=root
+ExecStart=/wowdsgn/admin-api/admin-api
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl enable admin-api.service
+
+
+
+
+nano application.properties
+
+wow.redis.password=admin123
+wow.redis.port=6380
+
+wow.datasource.admin.url=jdbc:mysql://127.0.0.1:3388/wowdsgn_admin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.admin.username=admin
+wow.datasource.admin.password=bOLZwUhs9aojUN81
+
+wow.datasource.attribute.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.attribute.username=admin
+wow.datasource.attribute.password=bOLZwUhs9aojUN81
+
+wow.datasource.marketing.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.marketing.username=admin
+wow.datasource.marketing.password=bOLZwUhs9aojUN81
+
+wow.datasource.order.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.order.username=admin
+wow.datasource.order.password=bOLZwUhs9aojUN81
+
+wow.datasource.page.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.page.username=admin
+wow.datasource.page.password=bOLZwUhs9aojUN81
+
+wow.datasource.price.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.price.username=admin
+wow.datasource.price.password=bOLZwUhs9aojUN81
+
+wow.datasource.product.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.product.username=admin
+wow.datasource.product.password=bOLZwUhs9aojUN81
+
+wow.datasource.stock.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.stock.username=admin
+wow.datasource.stock.password=bOLZwUhs9aojUN81
+
+wow.datasource.user.url=jdbc:mysql://127.0.0.1:3388/wowdsgn?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+wow.datasource.user.username=admin
+wow.datasource.user.password=bOLZwUhs9aojUN81
+
+

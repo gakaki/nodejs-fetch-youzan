@@ -23,7 +23,7 @@ var options = {
 
 
 
-var url = "https://koudaitong.com/v2/showcase/goods?"
+var url = "https://koudaitong.com/v2/showcase/goods#list&keyword=&p=1&orderby=created_time&order=desc&page_size=20&multistore_status=0"
 let wi  = webdriverio.remote(options)
     .init()
     .url(url)

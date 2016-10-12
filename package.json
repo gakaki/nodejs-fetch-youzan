@@ -8,7 +8,9 @@
     "se": "java -jar *.jar -Dwebdriver.chrome.driver='chromedriver' &",
     "start": "npm run se;node bootstrap.js;",
     "build": "browserify index.js > bundle.js",
-    "browser": "budo index.js --open"
+    "browser": "budo index.js --open",
+    "refresh": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js'"
+
   },
   "author": "",
   "license": "ISC",

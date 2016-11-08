@@ -33,13 +33,13 @@
 
             if (title){
 				var href  		  = title_el.attr('href').trim()
-                // var id            = $(el).find('.checkbox').eq(0).attr("data-item-id").trim();
+                var id            = $(el).find('.checkbox').eq(0).attr("data-item-id").trim();
                 var price         = $(el).find('.goods-price').eq(0).text().trim(); //供货价
                 var price_int     = price.replace("￥","");
 
-                // var td4           = $(el).children('td').eq(4);
-                // var uv            = $(td4).children('div').eq(0).text().trim().trimLeft().replace("UV:","");
-                // var pv            = $(td4).children('div').eq(1).text().trim().trimLeft().replace("PV:","");
+                var td4           = $(el).children('td').eq(4);
+                var uv            = $(td4).children('div').eq(0).text().trim().trimLeft().replace("UV:","");
+                var pv            = $(td4).children('div').eq(1).text().trim().trimLeft().replace("PV:","");
 
                 var stock         = $(el).children('td').eq(5).text().trim();//库存
 
@@ -52,13 +52,13 @@
 					href			: href,
                     title           : title,
                     brand           : brand,
-                    // id              : id,
+                    id              : id,
 
                     price           : price,
                     price_int       : price_int,
 
-                    // uv              : uv,
-                    // pv              : pv,
+                    uv              : uv,
+                    pv              : pv,
 
                     sale_num        : sale_num,
                     stock           : stock,

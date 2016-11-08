@@ -1,20 +1,13 @@
 "use strict";
 
-
 let YouzanFetch           = require('./DomOperate')
 let sleep                 = require('sleep');
 
 let fs                    = require('fs')
 let $                     = require('cheerio');
 
-let h                     = fs.readFileSync('cheeio_test.html', 'utf-8');
-h                         = $.load(h);
-let data                  = h.html();
-
-
-
-var webdriverio = require('webdriverio');
-var options = {
+var webdriverio           = require('webdriverio');
+var options               = {
     desiredCapabilities: {
         browserName: 'safari',
         debug:false
@@ -23,17 +16,15 @@ var options = {
 
 
 
-var url = "https://koudaitong.com/v2/showcase/goods#list&keyword=&p=1&orderby=created_time&order=desc&page_size=20&multistore_status=0"
+var url = "https://fx.youzan.com/supplier/goods/list"
 let wi  = webdriverio.remote(options)
     .init()
     .url(url)
 
-
 // wi.getTitle().then(function(title) {
 //         console.log('Title was: ' + title);
 //     })
-//     .setValue("[name=account]","13621822254")
-//     .setValue("[name=password]","z5896321")
+//
 //     .waitForExist('.js-list-body-region',100000)
 //     .getTitle().then(function(title) {
 //         console.log('Title was: ' + title);
@@ -48,47 +39,43 @@ wi.getTitle().then(function(title) {
 }).getHTML('.js-list-body-region').then(function(html) {
     let w = new Worker(wi);
     w.exec();
-});
-
+})
 
 
 let async_youzan_row = async function( num_iid ){
 
-		// 引入有赞SDK
-		let SDK 		= require('youzan-sdk');
-		// 初始化SDK，在 https://koudaitong.com/v2/apps/open/setting 开启API接口，复制相应 AppID、AppSecert
+    // 引入有赞SDK
+    let SDK 		= require('youzan-sdk');
+    // 初始化SDK，在 https://koudaitong.com/v2/apps/open/setting 开启API接口，复制相应 AppID、AppSecert
 
-		let AppID 		= "0eb3d2acf73c033353"
-		let AppSecert 	= "e4dbae40b7a367c1efb7eea48c00fa75"
-		let sdk_obj 	= SDK({key: AppID, secret: AppSecert})
-		let data 		= await sdk_obj.get('kdt.item.get', {
-		    num_iid: num_iid,
-		    fields: ""
-		});
+    let AppID 		= "0eb3d2acf73c033353"
+    let AppSecert 	= "e4dbae40b7a367c1efb7eea48c00fa75"
+    let sdk_obj 	= SDK({key: AppID, secret: AppSecert})
+    let data 		= await sdk_obj.get('kdt.item.get', {
+        num_iid: num_iid,
+        fields: ""
+    });
 
-		let youzan_row  = data.response.item;
-		console.log(youzan_row);
-		return youzan_row;
+    let youzan_row  = data.response.item;
+    console.log(youzan_row);
+    return youzan_row;
 }
-
-
 
 class Worker{
     constructor(wi){
         this.rows_total = [];
         this.wi         = wi;
         this.timeout    = 600;
-
     }
     to_db(){
 
     }
     async exec(){
-		
+
         let selector_page_next 	  = '.fetch_page.next';
-		let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
-		
-    
+        let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
+
+
         let c                     = new YouzanFetch($)
         let data                  = html;
         let res                   = c.get_page_rows(data);
@@ -116,12 +103,12 @@ class Worker{
 
 
 
-            try{
-                this.combine_with_youzan_api_data();
+                try{
+                    this.combine_with_youzan_api_data();
 
-            }catch(ex){
-                console.log(ex.message)
-            }
+                }catch(ex){
+                    console.log(ex.message)
+                }
 
 
 

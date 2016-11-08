@@ -7,22 +7,28 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "se": "java -jar *.jar -Dwebdriver.chrome.driver='chromedriver' &",
     "start": "npm run se;node bootstrap.js;",
+    "startfx": "npm run se;node bootstrap_fx.js;",
     "build": "browserify index.js > bundle.js",
     "browser": "budo index.js --open",
     "refresh": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js'"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel": "^6.0.15",
     "babel-core": "^6.1.2",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
     "bluebird": "^3.4.0",
     "browserify": "^13.0.0",
     "cheerio": "^0.20.0",
     "co-body": "^4.0.0",
     "crawler": "^0.4.3",
     "koa": "^1.1.1",
+    "labrador": "^0.5.1",
+    "labrador-test": "^0.5.1",
     "lodash": "^4.15.0",
     "node-xlsx": "^0.7.1",
     "phantom": "^2.1.3",
@@ -31,6 +37,10 @@
     "rethinkdb": "^2.3.2",
     "sleep": "^3.0.1",
     "webdriverio": "^4.0.9",
+    "wechat-api": "^1.31.0",
     "youzan-sdk": "0.0.8"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.16.0"
   }
 }

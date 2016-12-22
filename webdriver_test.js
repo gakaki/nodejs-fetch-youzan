@@ -84,14 +84,15 @@ class WorkerProductPage {
         this.rows_total     = []
         this.page_flag      = flag
 
-        //点击一下标题栏呗
-        this.wi.click(flag + " a");
+
     }
 
     async fetch_page_data(){
         let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
         let c                     = new YouzanFetch($)
         let res                   = c.get_page_rows(html);
+        res["flag"]               = this.page_flag //判断是售罄还是啥
+
         this.rows_total.push(res)
         console.log("rows",html,res)
     }
@@ -124,34 +125,44 @@ class Worker{
         this.wi             = wi;
         this.timeout        = 600;
         this.rows_group     = [];
-        this.page_flags     = ["js-nav-list-soldout","js-nav-list-index","js-nav-list-draft"];
+        // this.page_flags     = ["index","soldout","draft"];
+        this.page_flags     = ["index","soldout"];
+        this.rows_total     = [];
     }
 
     async fetch_tab_pages(){
+        var worker_procut_page      = null
         for ( let flag of this.page_flags ){
-            let worker_procut_page  = new WorkerProductPage(flag)
-            this.rows_group[flag]   = await worker_procut_page.exec()
+            worker_procut_page      = new WorkerProductPage(flag)
+
+            //点击一下标题栏呗
+            let tab_selector        = "#js-nav-list-" + flag + " a";
+            console.log(">>>>>>>点击了",tab_selector)
+
+            await this.wi.click(tab_selector)
+            await this.wi.pause(1000);
+
+            let  produc_page_data   = await worker_procut_page.exec()
+            this.rows_group.push(produc_page_data)
             console.log(this.rows_group)
         }
     }
     async exec(){
 
         await this.fetch_tab_pages()
-        //判断rows group 的长度
-        if ( this.rows_group.length == 3 ){
-            try{
-                //只有三个标签都搞定之后才能写入
-                this.wi.end();
-                await this.combine_with_youzan_api_data();
-            }catch(ex){
-                console.log(ex.message)
-            }
-        }else{
-            console.log( " 没有完全获取到 所有页面数据 共3个页面 获得页面总量为", this.rows_group.length)
+
+        try{
+            //只有三个标签都搞定之后才能写入
+            this.wi.end();
+            await this.combine_with_youzan_api_data();
+        }catch(ex){
+            console.log(ex.message)
         }
     }
 
     async combine_with_youzan_api_data(){
+
+        this.rows_total = [].concat(...this.rows_total)
 
         let m = this
         let count = 0

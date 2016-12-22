@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="130ef833-0023-4a28-b06b-a7e630a11bd9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webdriver_test.js" afterPath="$PROJECT_DIR$/webdriver_test.js" />
     </list>
     <ignored path="fetch-youzan.iws" />
@@ -26,8 +25,8 @@
       <file leaf-file-name="webdriver_test.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webdriver_test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="132" column="55" lean-forward="true" selection-start-line="132" selection-start-column="55" selection-end-line="132" selection-end-column="55" />
+            <state relative-caret-position="1395">
+              <caret line="167" column="21" lean-forward="true" selection-start-line="167" selection-start-column="21" selection-end-line="167" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -52,6 +51,9 @@
       <find>r id</find>
       <find>wi</find>
       <find>click</find>
+      <find>&quot;#js-nav-list-draft&quot;</find>
+      <find>sleep</find>
+      <find>wait</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -95,8 +97,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="46" />
-    <option name="y" value="22" />
+    <option name="x" value="31" />
+    <option name="y" value="27" />
     <option name="width" value="1196" />
     <option name="height" value="1012" />
   </component>
@@ -374,15 +376,15 @@
       <workItem from="1481097733443" duration="478000" />
       <workItem from="1482116698255" duration="1736000" />
       <workItem from="1482215402262" duration="2133000" />
-      <workItem from="1482384907781" duration="7421000" />
+      <workItem from="1482384907781" duration="14520000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100063000" />
+    <option name="totallyTimeSpent" value="107162000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="46" y="22" width="1196" height="1012" extended-state="0" />
+    <frame x="31" y="27" width="1196" height="1012" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2519149" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -459,12 +461,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webdriver_test.js</url>
-          <line>140</line>
+          <line>166</line>
           <properties />
-          <option name="timeStamp" value="166" />
+          <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/webdriver_test.js</url>
+          <line>164</line>
+          <properties />
+          <option name="timeStamp" value="189" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="167" />
+      <option name="time" value="190" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -518,8 +526,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webdriver_test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="132" column="55" lean-forward="true" selection-start-line="132" selection-start-column="55" selection-end-line="132" selection-end-column="55" />
+        <state relative-caret-position="1395">
+          <caret line="167" column="21" lean-forward="true" selection-start-line="167" selection-start-column="21" selection-end-line="167" selection-end-column="21" />
           <folding />
         </state>
       </provider>

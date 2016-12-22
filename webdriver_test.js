@@ -110,22 +110,16 @@ class Worker{
                 console.log(m.rows_total);
 
 
+                
 
 
-                this.wi.end();
-
-
-
-            try{
-                this.combine_with_youzan_api_data();
-
-            }catch(ex){
-                console.log(ex.message)
-            }
-
-
-
-
+                try{
+                    //只有三个标签都搞定之后才能写入
+                    this.wi.end();
+                    this.combine_with_youzan_api_data();
+                }catch(ex){
+                    console.log(ex.message)
+                }
 
             }
         })

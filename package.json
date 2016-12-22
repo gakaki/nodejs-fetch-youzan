@@ -36,11 +36,10 @@
     "request": "^2.65.0",
     "rethinkdb": "^2.3.2",
     "sleep": "^3.0.1",
-    "webdriverio": "^4.0.9",
     "wechat-api": "^1.31.0",
-    "youzan-sdk": "0.0.8"
-  },
-  "devDependencies": {
-    "babel-polyfill": "^6.16.0"
+    "youzan-sdk": "0.0.8",
+    "babel-polyfill": "^6.16.0",
+    "leancloud-storage": "^1.5.3",
+    "webdriverio": "^4.5.1"
   }
 }

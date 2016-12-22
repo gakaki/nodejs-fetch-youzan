@@ -46,8 +46,11 @@ let wi  = webdriverio.remote(options)
 wi.getTitle().then(function(title) {
     console.log('Title was: ' + title);
 }).getHTML('.js-list-body-region').then(function(html) {
+
+    //默认是 出售中
     let w = new Worker(wi);
     w.exec();
+
 });
 
 
@@ -73,58 +76,81 @@ let async_youzan_row = async function( num_iid ){
 
 
 
+class WorkerProductPage {
+
+    constructor(flag){
+        this.wi             = wi
+        this.timeout        = 600
+        this.rows_total     = []
+        this.page_flag      = flag
+
+        //点击一下标题栏呗
+        this.wi.click(flag + " a");
+    }
+
+    async fetch_page_data(){
+        let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
+        let c                     = new YouzanFetch($)
+        let res                   = c.get_page_rows(html);
+        this.rows_total.push(res)
+        console.log("rows",html,res)
+    }
+    async fetch_page(){
+
+        let selector_page_next 	  = '.fetch_page.next'
+        let isExisting            = await this.wi.isExisting(selector_page_next)
+        console.log(">>>>>>>>>>>>是否存在下一页按钮",isExisting);
+        if(isExisting) {
+            this.wi.pause(this.timeout).click(selector_page_next)
+            await this.fetch_page_data();
+            await this.fetch_page()
+        }else{
+            await this.fetch_page_data();
+        }
+
+    }
+
+    async exec(){
+        await this.fetch_page();
+        this.rows_total = [].concat(...this.rows_total)
+        console.log("执行结束  总算到达页面尾部了" )
+        console.log(this.rows_total)
+        return this.rows_total
+    }
+}
+
 class Worker{
     constructor(wi){
-        this.rows_total = [];
-        this.wi         = wi;
-        this.timeout    = 600;
-
+        this.wi             = wi;
+        this.timeout        = 600;
+        this.rows_group     = [];
+        this.page_flags     = ["js-nav-list-soldout","js-nav-list-index","js-nav-list-draft"];
     }
-    to_db(){
 
+    async fetch_tab_pages(){
+        for ( let flag of this.page_flags ){
+            let worker_procut_page  = new WorkerProductPage(flag)
+            this.rows_group[flag]   = await worker_procut_page.exec()
+            console.log(this.rows_group)
+        }
     }
     async exec(){
-		
-        let selector_page_next 	  = '.fetch_page.next';
-		let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
-		
-    
-        let c                     = new YouzanFetch($)
-        let data                  = html;
-        let res                   = c.get_page_rows(data);
-        console.log("rows",html,res)
 
-        this.rows_total.push(res)
-        this.wi.pause(this.timeout).click(selector_page_next)
-
-        let m  = this
-
-        this.wi.isExisting(selector_page_next).then((isExisting) =>{
-            console.log(isExisting);
-            if(isExisting){
-                this.exec();
-            }else{
-                m.rows_total = [].concat(...m.rows_total);
-
-                console.log("执行结束  总算到达页面尾部了" );
-                console.log(m.rows_total);
-
-
-                
-
-
-                try{
-                    //只有三个标签都搞定之后才能写入
-                    this.wi.end();
-                    this.combine_with_youzan_api_data();
-                }catch(ex){
-                    console.log(ex.message)
-                }
-
+        await this.fetch_tab_pages()
+        //判断rows group 的长度
+        if ( this.rows_group.length == 3 ){
+            try{
+                //只有三个标签都搞定之后才能写入
+                this.wi.end();
+                await this.combine_with_youzan_api_data();
+            }catch(ex){
+                console.log(ex.message)
             }
-        })
-
+        }else{
+            console.log( " 没有完全获取到 所有页面数据 共3个页面 获得页面总量为", this.rows_group.length)
+        }
     }
+
     async combine_with_youzan_api_data(){
 
         let m = this
@@ -173,10 +199,7 @@ class Worker{
 //
         })
 
-
-
         return m.rows_total
-
     }
 
 

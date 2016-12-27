@@ -27,6 +27,15 @@ class YouzanSDK {
         return sdk_obj
     }
 
+    async  test(){
+
+        let res = await youzan.get_all_orders_rows()
+        console.log("订单数据为",youzan.rows_orders)
+        console.log("订单数据总页面为",youzan.order_page_no,"每页面为",youzan.order_page_size)
+        console.log("订单数据总量为",youzan.total_results)
+
+    }
+
     async api_product_row(num_iid){
 
         let data 		= await this.sdk_obj.get('kdt.item.get', {

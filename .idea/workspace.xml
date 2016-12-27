@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="130ef833-0023-4a28-b06b-a7e630a11bd9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/worker/products.js" afterPath="$PROJECT_DIR$/worker/products.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/youzan/YouzanSDK.js" afterPath="$PROJECT_DIR$/youzan/YouzanSDK.js" />
     </list>
     <ignored path="fetch-youzan.iws" />
@@ -24,61 +23,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="products.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="products.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/worker/products.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="15" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="products_bootstrap.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="products_bootstrap.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/worker/products_bootstrap.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/youzan-sdk/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="request.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/request/request.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="968" column="11" lean-forward="false" selection-start-line="968" selection-start-column="11" selection-end-line="968" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="products_orders.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/worker/products_orders.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="YouzanSDK.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/youzan/YouzanSDK.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -147,8 +106,8 @@
         <option value="$PROJECT_DIR$/worker/products_bootstrap.js" />
         <option value="$PROJECT_DIR$/worker/products_row.js" />
         <option value="$PROJECT_DIR$/node_modules/youzan-sdk/index.js" />
-        <option value="$PROJECT_DIR$/worker/products.js" />
         <option value="$PROJECT_DIR$/youzan/YouzanSDK.js" />
+        <option value="$PROJECT_DIR$/worker/products.js" />
       </list>
     </option>
   </component>
@@ -169,7 +128,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="188" />
-    <option name="y" value="22" />
+    <option name="y" value="23" />
     <option name="width" value="1196" />
     <option name="height" value="1012" />
   </component>
@@ -514,15 +473,15 @@
       <workItem from="1482728403246" duration="273000" />
       <workItem from="1482740682278" duration="2000" />
       <workItem from="1482804394329" duration="8276000" />
-      <workItem from="1482819808023" duration="11517000" />
+      <workItem from="1482819808023" duration="11886000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133909000" />
+    <option name="totallyTimeSpent" value="134278000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="188" y="22" width="1196" height="1012" extended-state="0" />
+    <frame x="188" y="23" width="1196" height="1012" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2519149" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -957,18 +916,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/worker/products.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="15" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/youzan/YouzanSDK.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="195">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -976,7 +927,15 @@
     <entry file="file://$PROJECT_DIR$/worker/products_bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/worker/products.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>

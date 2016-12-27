@@ -29,7 +29,7 @@ let wi  = webdriverio.remote(options)
 //     .getTitle().then(function(title) {
 //         console.log('Title was: ' + title);
 //     }).getHTML('.js-list-body-region').then(function(html) {
-//         let w = new Worker(wi);
+//         let w = new WorkerOrders(wi);
 //         w.exec();
 //     });
 
@@ -72,7 +72,7 @@ class Worker{
     }
     async exec(){
 
-        let selector_page_next 	  = '.fetch_page.next';
+        let selector_page_next 	  = '.fetch_next_page.next';
         let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
 
 

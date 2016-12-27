@@ -45,7 +45,7 @@ let wi  = webdriverio.remote(options)
 //     .getTitle().then(function(title) {
 //         console.log('Title was: ' + title);
 //     }).getHTML('.js-list-body-region').then(function(html) {
-//         let w = new Worker(wi);
+//         let w = new WorkerOrders(wi);
 //         w.exec();
 //     });
 

@@ -19,12 +19,27 @@
 	let AppID 		= "0eb3d2acf73c033353"
 	let AppSecert 	= "e4dbae40b7a367c1efb7eea48c00fa75"
 	let sdk_obj 	= SDK({key: AppID, secret: AppSecert})
-	let data 		= await sdk_obj.get('kdt.item.get', {
-	    num_iid: "58358083",
-	    fields: ""
-	});
 
-	console.log(data.response.item);
 
-	
+	// let data 		= await sdk_obj.get('kdt.item.get', {
+	//     num_iid: "58358083",
+	//     fields: ""
+	// });
+    //
+	// console.log(data.response.item);
+
+
+	let data 			= await sdk_obj.get('kdt.trades.sold.get', {
+        type: "TRADE_BUYER_SIGNED",
+        fields: "",
+        page_size:"400",
+        use_has_next
+    });
+
+    console.log(data.response.total_results);
+
+
+
+
+
 })();

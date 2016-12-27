@@ -1,6 +1,6 @@
 "use strict";
 
-let YouzanFetch = require('./DomOperate')
+let YouzanFetch = require('./worker/DomOperate')
 
 let fs                    = require('fs')
 let $                     = require('cheerio');

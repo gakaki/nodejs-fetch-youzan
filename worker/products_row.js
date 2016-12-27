@@ -1,7 +1,5 @@
 "use strict";
 
-
-
  class YouzanFetch{
     constructor($){
         this.$                = $;

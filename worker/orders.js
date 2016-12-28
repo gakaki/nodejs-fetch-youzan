@@ -44,7 +44,7 @@ class WorkerOrderPage {
     async fetch_page_data(){
         let html 			   	  = await this.wi.pause(this.timeout).getHTML('.ui-table-order')
         let c                     = new OrdersRow()
-        let res                   = c.get_order_rows(html);
+        let res                   = c.get_orders(html);
 
         this.rows_total.push(res)
         console.log("rows",html,res)

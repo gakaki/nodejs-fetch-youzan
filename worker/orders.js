@@ -5,11 +5,6 @@ let OrdersRow             = require('./orders_row')
 let sleep                 = require('sleep');
 let fs                    = require('fs')
 
-let $                     = require('cheerio');
-let h                     = fs.readFileSync('orders_test.html', 'utf-8');
-h                         = $.load(h);
-let data                  = h.html();
-
 var webdriverio           = require('webdriverio');
 var options = {
     desiredCapabilities: {

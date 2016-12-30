@@ -53,11 +53,8 @@ let wi  = webdriverio.remote(options)
 wi.getTitle().then(function(title) {
     console.log('Title was: ' + title);
 }).getHTML('.js-list-body-region').then(function(html) {
-
-    //默认是 出售中
-    let w = new Worker(wi);
+    let w = new WorkerProductPage(wi);
     w.exec();
-
 });
 
 

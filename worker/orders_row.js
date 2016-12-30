@@ -1,28 +1,24 @@
 "use strict";
-let $                         = require('cheerio');
 
+let $                             = require('cheerio')
+let fs                            = require('fs')
 class OrdersRow{
     constructor(){
-        this.final_data       = [];
+        this.final_data           = []
+    }
+    test(){
+        let h                     = fs.readFileSync('order_test.html', 'utf-8')
+        h                         = $.load(h)
+        let data                  = h.html()
+        let order_row             = new OrdersRow()
+        let orders                = order_row.get_orders(data)
+        console.log(orders)
     }
 
-    get_brand_name(data){
-        var reg = /【.*】/
-        var res = data.match(reg)
-        console.log("match brand",res)
-        if (!res) {
-            return ""
-        }
-        else if (res.length >= 1)
-            res     = res[0]
-        else
-            res     = res
-        return res
-    }
     get_orders(data){
 
         this.page_data        = $('.widget-list-item',data);
-        this.page_data.map( (i, el) => {
+        this.final_data       = this.page_data.map( (i, el) => {
 
             let row_header      = this.get_header_row(el)
             row_header['rows']  = this.get_body_rows(el)
@@ -31,26 +27,51 @@ class OrdersRow{
         })
         return this.final_data;
     }
+    //获得 状态 enlish字段
+    get_status_en(data){
+        return data
+            // let status = {
+            //     "":TRADE_NO_CREATE_PAY, //没有创建支付交易
+            //     "":WAIT_BUYER_PAY,      //等待买家付款
+            //     "":TRADE_NO_CREATE_PAY,
+            //     "":TRADE_NO_CREATE_PAY,
+            //     "":TRADE_NO_CREATE_PAY,
+            //     "":TRADE_NO_CREATE_PAY,
+            //     "":TRADE_NO_CREATE_PAY,
+            //     "":TRADE_NO_CREATE_PAY,
+            //                              ）
+            //
+            // WAIT_GROUP（等待成团，即：买家已付款，等待成团）
+            // WAIT_SELLER_SEND_GOODS（等待卖家发货，即：买家已付款）
+            // WAIT_BUYER_CONFIRM_GOODS（等待买家确认收货，即：卖家已发货）
+            // TRADE_BUYER_SIGNED（买家已签收）
+            // TRADE_CLOSED（付款以后用户退款成功，交易自动关闭）
+            // ALL_WAIT_PAY（包含：WAIT_BUYER_PAY、TRADE_NO_CREATE_PAY）
+            // ALL_CLOSED（所有关闭订单）
+    }
     //获得头部订单数据
     get_header_row(el){
 
-        var header_row              = $(el).find(".header-row:eq(0)")
+        var header_row              = $(el).find(".header-row").eq(0) //注意这个node版本的css selector 不支持 :eq(0)这种写法
+        var content_row_0           = $(el).find(".content-row").eq(0)
 
-        var href                    = $(header_row).find(".js-opts a").attr("href").trim()
-        var order_no                = $(header_row).find("td div:eq(0)").html().replace("订单号: ","").trim()
-        var order_type              = $(header_row).find(".js-help-notes.c-gray").html().trim()
-        var order_no_outer          = $(header_row).find(".clearfix span").eq(0).html().trim()
-        var pay_no                  = $(header_row).find(".clearfix span").eq(1).html().trim()
+        var href                    = header_row.find(".js-opts a").attr("href").trim()
+        var order_no                = header_row.find("td div").eq(0).contents().first().text().trim().replace("订单号: ","").trim()
+        var order_type              = header_row.find("span.c-gray").eq(0).text().trim()
+        var order_no_outer          = header_row.find(".clearfix span").eq(0).text().trim()
+        var pay_no                  = header_row.find(".clearfix span").eq(1).text().trim()
 
-        var pay_user_compan         =
-        var pay_user_name           =
-        var pay_user_mobile         =
-        var created_at              =
-        var order_status            =
-        var order_status_en         =
-        var pay_moneyvar            =
+        var pay_user_company        = content_row_0.find(".customer-cell p").eq(0).text().trim()
+        var pay_user_name           = content_row_0.find(".customer-cell p.user-name").text().trim()
+        var pay_user_mobile         = content_row_0.find("td.customer-cell").eq(0).contents().last().text().trim()
+
+        var created_at              = content_row_0.find("td.time-cell .td-cont").text().trim()
+        var order_status            = content_row_0.find(".js-order-state").eq(0).text().trim()
+        var order_status_en         = this.get_status_en( order_status )
+        var pay_money               = content_row_0.find(".pay-price-cell .text-center div").text().trim()
 
         var res             = {
+
             href			: href,                 //查看具体详情链接页面
             order_no        : order_no,             //订单号
             order_type      : order_type,           //订单支付
@@ -68,62 +89,53 @@ class OrdersRow{
             pay_money       : pay_money,              //实付金额
         };
 
+        console.log(" >>>> 单个产品订单 ",res)
         return res;
 
     }
     get_body_rows(el){
 
-        var title_el		  = $(el).find(".new-window").eq(0)
-        var title             = title_el.text().trim()
-        var brand             = this.get_brand_name(title)
+        var rows_data               = []
+        var content_rows            = $(el).find(".content-row")
 
-        if (title){
-            var href  		  = title_el.attr('href').trim()
-            var id            = $(el).find('.checkbox').eq(0).attr("data-item-id").trim();
-            var price         = $(el).find('.goods-price').eq(0).text().trim(); //供货价
-            var price_int     = price.replace("￥","");
+        content_rows.each(function(i,e){
+            var row         = $(e)
+            var a           = row.find(".title-cell .goods-title .new-window").eq(0)
 
-            var td4           = $(el).children('td').eq(4);
-            var uv            = $(td4).children('div').eq(0).text().trim().trimLeft().replace("UV:","");
-            var pv            = $(td4).children('div').eq(1).text().trim().trimLeft().replace("PV:","");
+            var image_href  = row.find(".image-cell img").eq(0).attr("src")
+            var name        = a.attr("title")
+            var href        = a.attr("href")
+            var text        = row.find('.title-cell').eq(0).find('span.goods-sku').text().trim()
+            var price       = row.find(".price-cell").eq(0).find("p").eq(0).text().trim()
+            var num_str     = row.find(".price-cell").eq(0).find("p").eq(1).text().trim()
+            var num         = num_str.replace(/(?!-)[^0-9.]/g, "")
 
-            var stock         = $(el).children('td').eq(5).text().trim();//库存
+            if (image_href){
 
-            var sale_num      = $(el).children('td').eq(6).text().trim();
-            sale_num          = sale_num.replace('-',"0");
+                var o             = {
+                    image_href	  : image_href,         //产品图片链接
+                    name          : name,               //产品名
+                    href          : href,               //产品链接
+                    text          : text,               //产品名 多
+                    price         : price,              //SKU价格
+                    num           : num,                 //购买数量
+                    num_str       : num_str,           //数量str
+                };
 
-            var created_at    = $(el).children('td').eq(7).text().trim();
+                rows_data.push(o);
+            }else{
+                return null;
+            }
 
-            var o             = {
-                href			: href,                 //查看具体详情链接页面
-                order_no        : order_no,             //订单号
-                order_type      : order_type,           //订单支付
-                order_no_outer  : order_no_outer,       //订单号外部
-                pay_no          : pay_no,               //支付流水号
-
-
-                title           : title,
-                brand           : brand,
-                id              : id,
-
-                price           : price,
-                price_int       : price_int,
-
-                uv              : uv,
-                pv              : pv,
-
-                sale_num        : sale_num,
-                stock           : stock,
-                created_at      : created_at
-            };
-
-            this.final_data.push(o);
-            return o;
-        }else{
-            return null;
-        }
-
-
+        })
+        return rows_data;
     }
 }
+
+
+// let ordersRow = new OrdersRow()
+// ordersRow.test()
+
+
+
 module.exports = OrdersRow

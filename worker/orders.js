@@ -3,8 +3,7 @@
 let YouzanSDK             = require('../youzan/YouzanSDK')
 let OrdersRow             = require('./orders_row')
 let sleep                 = require('sleep');
-let fs                    = require('fs')
-
+let DB                    = require('./db');
 var webdriverio           = require('webdriverio');
 var options = {
     desiredCapabilities: {
@@ -13,6 +12,13 @@ var options = {
     }
 };
 
+// async function test(){
+//     let db_test               = new DB()
+//     await db_test.conn()
+//     await db_test.test()
+//     return
+// }
+// test()
 
 var url = "https://koudaitong.com/v2/trade/order#list&p=1&type=all&state=all&orderby=book_time&tuanId=&order=desc&page_size=20&disable_express_type="
 let wi  = webdriverio.remote(options)
@@ -21,8 +27,7 @@ let wi  = webdriverio.remote(options)
 
 wi.getTitle().then(function(title) {
     console.log('Title was: ' + title);
-}).getHTML('.ui-table-order').then(function(html) {
-    //默认是 出售中
+}).pause(1000).getHTML('.ui-pagination-prev').then(function(html) {
     let w = new WorkerOrders(wi);
     w.exec();
 });
@@ -36,8 +41,9 @@ class WorkerOrderPage {
         this.rows_total     = []
     }
 
+
     async fetch_page_data(){
-        let html 			   	  = await this.wi.pause(this.timeout).getHTML('.ui-table-order')
+        let html 			   	  = await this.wi.getHTML('.ui-table-order')
         let c                     = new OrdersRow()
         let res                   = c.get_orders(html);
 
@@ -46,11 +52,14 @@ class WorkerOrderPage {
     }
     async fetch_next_page(){
 
-        let selector_page_next 	  = '.ui-pagination-prev'
+        let selector_page_next 	  = '.ui-pagination-prev:last-child'
         let isExisting            = await this.wi.isExisting(selector_page_next)
         console.log(">>>>>>>>>>>>是否存在下一页按钮",isExisting);
         if(isExisting) {
-            this.wi.pause(this.timeout).click(selector_page_next)
+
+            this.wi.pause(this.timeout).waitForExist(selector_page_next,5000)
+                .click(selector_page_next)
+                // .moveToObject(selector_page_next,0,0)
             await this.fetch_page_data();
             await this.fetch_next_page()
         }else{
@@ -82,28 +91,37 @@ class WorkerOrders{
         console.log(this.rows_total)
     }
     async exec(){
-
-        await this.fetch_orders()
-
         try{
-            //只有三个标签都搞定之后才能写入
+            await this.fetch_orders()
+            console.log(this.rows_total)
             this.wi.end();
-            await this.combine_with_youzan_api_data();
+            await this.to_db();
         }catch(ex){
             console.log(ex.message)
         }
     }
 
-    async combine_with_youzan_api_data(){
+    async to_db(){
 
-        this.rows_total = [].concat(...this.rows_total)
+        m.rows_total = [].concat(...m.rows_total)
+        await db.full_insert_order( m.rows_total)
 
-        let m = this
+        // await this.fetch_youzan_order_product_detail()
+
+        var db = new DB()
+        db.conn()
+        await db.full_insert_order_detail( m.rows_total)
+        return  m.rows_total
+    }
+
+    async fetch_youzan_order_product_detail(){
+
         let count = 0
+
         for(let r of m.rows_total){
-            let product_id		  = r['id'];
-            console.log( "r id" , product_id )
-            let youzan_row_data   = await youzan.api_product_row( product_id );
+            let alias		  = r['alias'];
+            console.log( "r alias" , product_id )
+            let youzan_row_data   = await youzan.api_product_row_by_alias( alias );
             r  = Object.assign(r,youzan_row_data);
 
             count++;
@@ -115,37 +133,6 @@ class WorkerOrders{
 
             console.log("现在的总数为",m.rows_total.length, "当前为 : " , count)
         }
-
-        let data = m.rows_total
-
-
-        var r = require('rethinkdb');
-
-        var connection = null;
-        r.connect( {host: 'wowdsgn.com', port: 28015}, (err, conn) => {
-
-            if (err) throw err;
-            connection = conn;
-
-            let dbName 		= 'youzan'
-            let tableName 	= "product"
-            let db 			= r.db(dbName)
-            let table		= db.table(tableName)
-
-
-            table.delete().run(connection, (err, result) => {
-                if (err) throw err;
-                table.insert(this.rows_total).run(connection, (err, result) => {
-                    if (err) throw err;
-                    console.log(JSON.stringify(result, null, 2));
-                })
-            })
-
-//
-        })
-
         return m.rows_total
     }
-
-
 }

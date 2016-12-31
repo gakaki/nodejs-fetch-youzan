@@ -22,12 +22,9 @@ let wi  = webdriverio.remote(options)
 wi.getTitle().then(function(title) {
     console.log('Title was: ' + title);
 }).getHTML('.js-list-body-region').then(function(html) {
-
-    let w = new Worker(wi);
+    let w = new WorkerProductPage(wi);
     w.exec();
-
 });
-
 
 class WorkerProductPage {
 
@@ -36,8 +33,6 @@ class WorkerProductPage {
         this.timeout        = 600
         this.rows_total     = []
         this.page_flag      = flag
-
-
     }
 
     async fetch_page_data(){

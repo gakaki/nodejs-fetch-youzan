@@ -48,6 +48,19 @@ class YouzanSDK {
         return youzan_row;
     }
 
+    async api_product_row_by_alias(alias){
+
+        let data 		= await this.sdk_obj.get('kdt.item.get', {
+            alias: alias,
+            fields: ""
+        });
+
+        let youzan_row  = data.response.item;
+        console.log(youzan_row);
+        return youzan_row;
+    }
+
+
     array_empty_or_nil(arr){
         if(typeof arr ==='object' && arr instanceof Array ){
             if(!arr.length){

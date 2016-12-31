@@ -58,8 +58,6 @@ wi.getTitle().then(function(title) {
 });
 
 
-
-
 class WorkerProductPage {
 
     constructor(flag){

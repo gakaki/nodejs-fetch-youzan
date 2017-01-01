@@ -2,9 +2,11 @@
 
 let YouzanSDK             = require('../youzan/YouzanSDK')
 let OrdersRow             = require('./orders_row')
-let sleep                 = require('sleep');
-let DB                    = require('./db');
-var webdriverio           = require('webdriverio');
+let sleep                 = require('sleep')
+let DB                    = require('./db')
+let lodash                = require("lodash")
+var webdriverio           = require('webdriverio')
+
 var options = {
     desiredCapabilities: {
         browserName: 'safari',
@@ -36,9 +38,10 @@ wi.getTitle().then(function(title) {
 class WorkerOrderPage {
 
     constructor(){
-        this.wi             = wi
-        this.timeout        = 600
-        this.rows_total     = []
+        this.wi                 = wi
+        this.timeout            = 600
+        this.rows_total         = []
+        this.test_page_count    = 0
     }
 
 
@@ -50,13 +53,23 @@ class WorkerOrderPage {
         this.rows_total.push(res)
         console.log("rows",html,res)
     }
+
+    mock_page_count(){
+        this.test_page_count = this.test_page_count + 1
+        if ( this.test_page_count > 2) {
+            return false
+        }else {
+            return  true
+        }
+    }
     async fetch_next_page(){
 
         let selector_page_next 	  = '.ui-pagination-prev:last-child'
         let isExisting            = await this.wi.isExisting(selector_page_next)
         console.log(">>>>>>>>>>>>是否存在下一页按钮",isExisting);
-        if(isExisting) {
 
+        // if(isExisting && this.mock_page_count()) {
+        if(isExisting ) {
             this.wi.pause(this.timeout).waitForExist(selector_page_next,5000)
                 .click(selector_page_next)
                 // .moveToObject(selector_page_next,0,0)
@@ -68,9 +81,20 @@ class WorkerOrderPage {
 
     }
 
+    flatten_orders(){
+        let orders = []
+        for (var i = 0; i < this.rows_total.length; i++) {
+            for (var j = 0; j < this.rows_total[i].length; j++) {
+                orders.push(this.rows_total[i][j])
+            }
+        }
+
+        return orders
+    }
     async exec(){
-        await this.fetch_next_page();
-        this.rows_total = [].concat(...this.rows_total)
+        await this.fetch_next_page()
+        this.rows_total = this.flatten_orders()
+
         console.log("执行结束  总算到达页面尾部了" )
         console.log(this.rows_total)
         return this.rows_total
@@ -85,15 +109,14 @@ class WorkerOrders{
     }
 
     async fetch_orders(){
-        var worker_procut_page  = new WorkerOrderPage()
-        let  produc_page_data   = await worker_procut_page.exec()
-        this.rows_total.push(produc_page_data)
+        var order_page          = new WorkerOrderPage()
+        let order_page_data     = await order_page.exec()
+        this.rows_total.push(order_page_data)
         console.log(this.rows_total)
     }
     async exec(){
         try{
             await this.fetch_orders()
-            console.log(this.rows_total)
             this.wi.end();
             await this.to_db();
         }catch(ex){
@@ -103,22 +126,25 @@ class WorkerOrders{
 
     async to_db(){
 
-        m.rows_total = [].concat(...m.rows_total)
-        await db.full_insert_order( m.rows_total)
-
-        // await this.fetch_youzan_order_product_detail()
+        this.rows_total = [].concat(...this.rows_total)
 
         var db = new DB()
-        db.conn()
-        await db.full_insert_order_detail( m.rows_total)
-        return  m.rows_total
+        await db.conn()
+        let res   = await db.full_insert_order( this.rows_total)
+        console.log("显示一下数据库结果" , res)
+
+        // await this.fetch_youzan_order_product_detail()
+        // res  = await db.full_insert_order_detail( this.rows_total)
+
+        console.log("显示一下最后的所有数据 长度" , this.rows_total.length)
+        return  this.rows_total
     }
 
     async fetch_youzan_order_product_detail(){
 
         let count = 0
 
-        for(let r of m.rows_total){
+        for(let r of this.rows_total){
             let alias		  = r['alias'];
             console.log( "r alias" , product_id )
             let youzan_row_data   = await youzan.api_product_row_by_alias( alias );
@@ -131,8 +157,8 @@ class WorkerOrders{
 
             sleep.usleep(500000)
 
-            console.log("现在的总数为",m.rows_total.length, "当前为 : " , count)
+            console.log("现在的总数为",this.rows_total.length, "当前为 : " , count)
         }
-        return m.rows_total
+        return this.rows_total
     }
 }

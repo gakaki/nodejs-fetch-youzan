@@ -67,9 +67,7 @@ class Worker{
         this.wi         = wi;
         this.timeout    = 600;
     }
-    to_db(){
 
-    }
     async exec(){
 
         let selector_page_next 	  = '.fetch_next_page.next';
@@ -165,12 +163,7 @@ class Worker{
 
 //
         })
-
-
-
         return m.rows_total
-
     }
-
 
 }

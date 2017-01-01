@@ -1,8 +1,8 @@
 "use strict";
+let $                         = require('cheerio')
 
- class YouzanFetch{
-    constructor($){
-        this.$                = $;
+class YouzanFetch{
+    constructor(){
         this.final_data       = [];
     }
 
@@ -21,8 +21,8 @@
     }
 
     get_page_rows(data){
-        let $                 = this.$;
-        this.page_data        = $('.widget-list-item',data);
+
+        this.page_data            = $('.widget-list-item',data);
         this.page_data.map( (i, el) => {
 
 			var title_el		  = $(el).find(".new-window").eq(0)
@@ -31,7 +31,9 @@
 
             if (title){
 				var href  		  = title_el.attr('href').trim()
-                var id            = $(el).find('.checkbox').eq(0).attr("data-item-id").trim();
+                var product_id    = $(el).find('.checkbox').eq(0).attr("data-item-id").trim();
+
+				var alias         = href.substr((href.lastIndexOf('/')+1))
                 var price         = $(el).find('.goods-price').eq(0).text().trim(); //供货价
                 var price_int     = price.replace("￥","");
 
@@ -50,8 +52,8 @@
 					href			: href,
                     title           : title,
                     brand           : brand,
-                    id              : id,
-
+                    product_id      : product_id,
+                    alias           : alias,
                     price           : price,
                     price_int       : price_int,
 

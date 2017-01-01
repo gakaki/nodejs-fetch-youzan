@@ -8,22 +8,24 @@ class DB {
     }
 
     async full_insert_product( rows ){
-        await this.table_remove_insert(this.tableProduct , rows)
+        return await this.table_remove_insert(this.tableProduct , rows)
     }
 
     async full_insert_order( rows ){
-        await this.table_remove_insert(this.tableOrder , rows)
+        return await this.table_remove_insert(this.tableOrder , rows)
     }
 
     async full_insert_order_detail( rows ){
-        await this.table_remove_insert(this.tableOrderDetail , rows)
+        return await this.table_remove_insert(this.tableOrderDetail , rows)
     }
     async table_remove_insert(table_object,rows){
         try {
             await table_object.delete().run(this.conn)
-            await table_object.insert( rows ).run(this.conn)
+            let res = await table_object.insert( rows ).run(this.conn)
+            return res
         }catch(e){
             console.log(">>>>> rethinkdb full_insert_order_detail 插入出错",JSON.stringify(e, null, 2));
+            return null
         }
     }
 

@@ -2,24 +2,18 @@
 
 let YouzanSDK             = require('../youzan/YouzanSDK')
 let YouzanFetch           = require('./products_row')
-let sleep                 = require('sleep');
-let fs                    = require('fs')
-
-// let $                     = require('cheerio');
-// let h                     = fs.readFileSync('cheeio_test.html', 'utf-8');
-// h                         = $.load(h);
-// let data                  = h.html();
-
+let sleep                 = require('sleep')
+let DB                    = require('./db')
 
 const youzan = new YouzanSDK();
 // Object.freeze(youzan);
 
-async function test(){
-    let res = await youzan.test()
-    console.log("最后结果为",res)
-}
-
-test()
+// async function test(){
+//     let res = await youzan.test()
+//     console.log("最后结果为",res)
+// }
+//
+// test()
 
 var webdriverio = require('webdriverio');
 var options = {
@@ -30,7 +24,7 @@ var options = {
 };
 
 
-var url = "https://koudaitong.com/v2/showcase/goods#list&keyword=&p=1&orderby=created_time&order=desc&page_size=20&multistore_status=0"
+var url = "https://koudaitong.com/v2/showcase/goods#list&keyword=&p=1&orderby=created_time&order=desc&page_size=20&disable_express_type=&multistore_status=0"
 let wi  = webdriverio.remote(options)
     .init()
     .url(url)
@@ -53,7 +47,7 @@ let wi  = webdriverio.remote(options)
 wi.getTitle().then(function(title) {
     console.log('Title was: ' + title);
 }).getHTML('.js-list-body-region').then(function(html) {
-    let w = new WorkerProductPage(wi);
+    let w = new Worker(wi);
     w.exec();
 });
 
@@ -61,17 +55,17 @@ wi.getTitle().then(function(title) {
 class WorkerProductPage {
 
     constructor(flag){
-        this.wi             = wi
-        this.timeout        = 600
-        this.rows_total     = []
-        this.page_flag      = flag
-
+        this.wi                 = wi
+        this.timeout            = 600
+        this.rows_total         = []
+        this.page_flag          = flag
+        this.test_page_count    = 0
 
     }
 
     async fetch_page_data(){
         let html 			   	  = await this.wi.pause(this.timeout).getHTML('.js-list-body-region')
-        let c                     = new YouzanFetch($)
+        let c                     = new YouzanFetch()
         let res                   = c.get_page_rows(html);
 
         res.map( (el,i) => {
@@ -88,7 +82,8 @@ class WorkerProductPage {
         let selector_page_next 	  = '.fetch_page.next'
         let isExisting            = await this.wi.isExisting(selector_page_next)
         console.log(">>>>>>>>>>>>是否存在下一页按钮",isExisting);
-        if(isExisting) {
+        // if(isExisting && this.mock_page_count()) {
+        if( isExisting ) {
             this.wi.pause(this.timeout).click(selector_page_next)
             await this.fetch_page_data();
             await this.fetch_page()
@@ -98,6 +93,14 @@ class WorkerProductPage {
 
     }
 
+    mock_page_count(){
+        this.test_page_count = this.test_page_count + 1
+        if ( this.test_page_count > 3) {
+            return false
+        }else {
+            return  true
+        }
+    }
     async exec(){
         await this.fetch_page();
         this.rows_total = [].concat(...this.rows_total)
@@ -139,8 +142,10 @@ class Worker{
 
         try{
             //只有三个标签都搞定之后才能写入
-            this.wi.end();
-            await this.combine_with_youzan_api_data();
+            this.wi.end()
+            // await this.combine_with_youzan_api_data()
+            await this.to_db()
+
         }catch(ex){
             console.log(ex.message)
         }
@@ -150,54 +155,31 @@ class Worker{
 
         this.rows_total = [].concat(...this.rows_total)
 
-        let m = this
-        let count = 0
-        for(let r of m.rows_total){
-            let product_id		  = r['id'];
-            console.log( "r id" , product_id )
-            let youzan_row_data   = await youzan.api_product_row( product_id );
+        let count   = 0
+        for(let r of this.rows_total){
+
+            console.log( "r product_id" , r["product_id"] )
+            let youzan_row_data   = await youzan.api_product_row( r["product_id"] );
             r  = Object.assign(r,youzan_row_data);
 
             count++;
-            r["product_id"] = r['id'];
-            r['id']         = count;
+            r['series_id']   = count;
             console.log( "r youzan data combine is " , r )
 
             sleep.usleep(500000)
 
-            console.log("现在的总数为",m.rows_total.length, "当前为 : " , count)
+            console.log("现在的总数为",this.rows_total.length, "当前为 : " , count)
         }
-
-        let data = m.rows_total
-
-
-        var r = require('rethinkdb');
-
-        var connection = null;
-        r.connect( {host: 'wowdsgn.com', port: 28015}, (err, conn) => {
-
-            if (err) throw err;
-            connection = conn;
-
-            let dbName 		= 'youzan'
-            let tableName 	= "product"
-            let db 			= r.db(dbName)
-            let table		= db.table(tableName)
-
-
-            table.delete().run(connection, (err, result) => {
-                if (err) throw err;
-                table.insert(this.rows_total).run(connection, (err, result) => {
-                    if (err) throw err;
-                    console.log(JSON.stringify(result, null, 2));
-                })
-            })
-
-//
-        })
-
-        return m.rows_total
     }
+    async to_db(){
+        this.rows_total = [].concat(...this.rows_total)
 
+        var db = new DB()
+        await db.conn()
+        let  res  = await db.full_insert_product( this.rows_total)
+        console.log("显示一下最后的所有数据" , this.rows_total)
+        console.log("显示一下数据库结果" , res)
+        return this.rows_total
+    }
 
 }

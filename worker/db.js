@@ -89,6 +89,35 @@ class DB {
             return null
         }
     }
+
+
+    async query_order_product(){
+
+            let cursor    = await this.tableProduct
+                .outerJoin(
+            this.tableOrder
+                .filter(function(r){
+                    return  r("alias").ne('')
+                })
+                .group('alias').max('created_at')
+                .concatMap(function (x) {
+                    return x("rows").merge(x.without('rows'))
+                })
+                // .limit(200)
+                .ungroup()
+                .map(function(o) {
+                    return o.merge(o('reduction')).without('reduction')
+                })
+                // .coerceTo('array')
+                , function(p, o) {
+                return p('alias').eq(o('alias'))
+            }).zip().run(this.conn)
+
+            let res    = await cursor.toArray()
+            console.log("rethinkdb query_order_product 返回数据为 ",res)
+            return res
+
+    }
 }
 
 

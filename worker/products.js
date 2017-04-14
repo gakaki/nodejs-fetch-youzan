@@ -115,7 +115,7 @@ class Worker{
         this.wi             = wi;
         this.timeout        = 600;
         // this.page_flags     = ["index","soldout","draft"];
-        this.page_flags     = ["index","soldout"];
+        this.page_flags     = ["index","soldout","draft"];
         this.rows_total     = [];
     }
 
@@ -143,7 +143,7 @@ class Worker{
         try{
             //只有三个标签都搞定之后才能写入
             this.wi.end()
-            // await this.combine_with_youzan_api_data()
+            await this.combine_with_youzan_api_data()
             await this.to_db()
 
         }catch(ex){

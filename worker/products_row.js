@@ -38,8 +38,8 @@ class YouzanFetch{
                 var price_int     = price.replace("￥","");
 
                 var td4           = $(el).children('td').eq(4);
-                var uv            = $(td4).children('div').eq(0).text().trim().trimLeft().replace("UV:","");
-                var pv            = $(td4).children('div').eq(1).text().trim().trimLeft().replace("PV:","");
+                var uv            = $(td4).children('div').eq(0).text().trim().trimLeft().replace("UV:","").replace("浏览量:","");
+                var pv            = $(td4).children('div').eq(1).text().trim().trimLeft().replace("PV:","").replace("访客数:","");
 
                 var stock         = $(el).children('td').eq(5).text().trim();//库存
 
